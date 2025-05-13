@@ -130,7 +130,7 @@
             { "holding_brush": "q.is_item_name_any('slot.weapon.mainhand', 'minecraft:brush')" },
             { "brushing": "v.is_using_brush" },
 
-            { "use_item_progress": "((v.use_item_interval_progress > 0.0) || (v.use_item_startup_progress > 0.0)) && !v.is_brandishing_spear && !v.is_holding_spyglass && !v.is_tooting_goat_horn && !v.is_using_brush && !q.is_item_name_any('slot.weapon.mainhand', 'minecraft:bow', 'minecraft:crossbow')" }
+            { "use_item_progress": "((v.use_item_interval_progress > 0.0) || (v.use_item_startup_progress > 0.0)) && !v.is_brandishing_spear && !v.is_holding_spyglass && !v.is_tooting_goat_horn && !v.is_using_brush && !q.is_item_name_any('slot.weapon.mainhand', 'minecraft:bow', 'minecraft:crossbow', 'minecraft:fishing_rod')" }
           ],
           "transitions": [
             { "first_person": "v.is_first_person" },

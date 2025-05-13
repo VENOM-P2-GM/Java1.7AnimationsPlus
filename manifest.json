@@ -18,17 +18,17 @@
   ],
   "subpacks": [
     {
-      "folder_name": "narmor_red_nparticle_eat",
+      "folder_name": "narmor_red_npart_eat",
       "name": "\u00a7gNo Armor Overlay\u00a7r + \u00a7cRedder Hurt Color Overlay\u00a7r + \u00a7bNo Damage/Projectile Particles\u00a7r + \u00a7aConsole Edition Eat Animation\u00a7r",
       "memory_tier": 0
     },
     {
-      "folder_name": "narmor_nparticle_eat",
+      "folder_name": "narmor_npart_eat",
       "name": "\u00a7gNo Armor Overlay\u00a7r + \u00a7bNo Damage/Projectile Particles\u00a7r + \u00a7aConsole Edition Eat Animation\u00a7r",
       "memory_tier": 0
     },
     {
-      "folder_name": "red_nparticle_eat",
+      "folder_name": "red_npart_eat",
       "name": "\u00a7cRedder Hurt Color Overlay\u00a7r + \u00a7bNo Damage/Projectile Particles\u00a7r + \u00a7aConsole Edition Eat Animation\u00a7r",
       "memory_tier": 0
     },
@@ -38,12 +38,12 @@
       "memory_tier": 0
     },
     {
-      "folder_name": "narmor_nparticle",
+      "folder_name": "narmor_npart",
       "name": "\u00a7gNo Armor Overlay\u00a7r + \u00a7bNo Damage/Projectile Particles\u00a7r",
       "memory_tier": 0
     },
     {
-      "folder_name": "red_nparticle",
+      "folder_name": "red_npart",
       "name": "\u00a7cRedder Hurt Color Overlay\u00a7r + \u00a7bNo Damage/Projectile Particles\u00a7r",
       "memory_tier": 0
     },
@@ -58,7 +58,7 @@
       "memory_tier": 0
     },
     {
-      "folder_name": "nparticle",
+      "folder_name": "npart",
       "name": "\u00a7bNo Damage/Projectile Particles\u00a7r",
       "memory_tier": 0
     },

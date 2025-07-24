@@ -8,7 +8,12 @@
         "default": "entity_alphatest"
       },
       "textures": {
-        "default": "textures/items/egg"
+        "default": "textures/items/egg",
+
+        // these textures will throw content log errors < 1.21.70, although those alone won't break anything
+        // currently, it's the best way to achieve backwards compatibility :(
+        "warm": "textures/items/brown_egg",
+        "cold": "textures/items/blue_egg"
       },
       "geometry": {
         "default": "geometry.item_sprite"
@@ -24,12 +29,16 @@
         "initialize":[
           "variable.life_time = 0.0;"
         ],
+        "pre_animation": [
+          "t.variant = q.has_property('minecraft:climate_variant') ? q.property('minecraft:climate_variant') : 'temperate';",
+          "v.index = (t.variant == 'temperate') ? 0 : ((t.variant == 'warm') ? 1 : 2);"
+        ],
         "animate": [
           "flying"
-          //{ "particle": "query.is_moving" } // query.modified_move_speed >= 0.01
+          //{ "particle": "q.is_moving" } // q.modified_move_speed >= 0.01
         ]
       },
-      "render_controllers": [ "controller.render.item_sprite" ]
+      "render_controllers": [ "controller.render.egg" ]
     }
   }
 }

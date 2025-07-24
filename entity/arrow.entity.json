@@ -22,17 +22,17 @@
       },
       "scripts": {
         "pre_animation": [
-          "variable.shake = query.shake_time - query.frame_alpha;",
-          "variable.shake_power = variable.shake > 0.0 ? -math.sin(variable.shake * 200.0) * variable.shake : 0.0;"
+          "v.shake = q.shake_time - q.frame_alpha;",
+          "v.shake_power = v.shake > 0.0 ? -math.sin(v.shake * 200.0) * v.shake : 0.0;"
         ],
         "animate": [
           "move",
-          { "fire": "query.is_on_fire" }
+          { "fire": "q.is_on_fire" }
         ]
       },
       "render_controllers": [
         "controller.render.arrow",
-        { "controller.render.projectile.fire": "query.is_on_fire" }
+        { "controller.render.projectile.fire": "q.is_on_fire" }
       ]
     }
   }

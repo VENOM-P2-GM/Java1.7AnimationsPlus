@@ -27,7 +27,7 @@
       },
       "scripts": {
         "initialize":[
-          "variable.life_time = 0.0;"
+          "v.life_time = 0.0;"
         ],
         "pre_animation": [
           "t.variant = q.has_property('minecraft:climate_variant') ? q.property('minecraft:climate_variant') : 'temperate';",

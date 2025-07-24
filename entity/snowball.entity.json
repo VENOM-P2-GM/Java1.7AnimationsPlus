@@ -22,11 +22,11 @@
       },
       "scripts": {
         "initialize":[
-          "variable.life_time = 0.0;"
+          "v.life_time = 0.0;"
         ],
         "animate": [
           "flying",
-          { "particle": "query.is_moving" } // query.modified_move_speed >= 0.01
+          { "particle": "q.is_moving" } // q.modified_move_speed >= 0.01
         ]
       },
       "render_controllers": [ "controller.render.item_sprite" ]

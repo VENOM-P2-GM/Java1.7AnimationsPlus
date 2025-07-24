@@ -24,12 +24,12 @@
         "scale": "2.0",
         "animate": [
           "face_player",
-          { "fire": "query.is_on_fire" }
+          { "fire": "q.is_on_fire" }
         ]
       },
       "render_controllers": [
         "controller.render.fireball",
-        { "controller.render.projectile.fire": "query.is_on_fire" }
+        { "controller.render.projectile.fire": "q.is_on_fire" }
       ]
     }
   }

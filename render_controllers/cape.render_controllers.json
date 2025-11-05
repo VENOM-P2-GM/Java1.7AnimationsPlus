@@ -3,13 +3,11 @@
   "format_version": "1.10.0",
   "render_controllers": {
     "controller.render.player.cape": {
-      "rebuild_animation_matrices": true,
-      "geometry": "Geometry.cape",
-      "materials": [ { "*": "Material.cape" } ],
-      "textures": [ "Texture.cape" ],
+      "geometry": "q.is_emoting ? geometry.cape : geometry.cape_root_parent",
+      "materials": [ { "*": "material.cape" } ],
+      "textures": [ "texture.cape" ],
       "part_visibility": [
-        //{ "cape": "query.armor_texture_slot(1) != 5 && (!variable.is_first_person || variable.is_paperdoll) && !variable.map_face_icon && !query.is_spectator" }
-        { "*": false }
+        { "cape": "(q.armor_texture_slot(1) != 5) && (!v.is_first_person || v.is_paperdoll) && !v.map_face_icon && !q.is_spectator" }
       ],
       "is_hurt_color": {
         "r": 0.0,

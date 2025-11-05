@@ -21,8 +21,7 @@
         "parent_setup": "v.chest_layer_visible = 0.0;"
       },
       "render_controllers": [
-        { "controller.render.armor": "q.is_emoting" },
-        { "controller.render.armor.chestplate": "!q.is_emoting" }
+        "controller.render.armor.chestplate"
       ]
     }
   }

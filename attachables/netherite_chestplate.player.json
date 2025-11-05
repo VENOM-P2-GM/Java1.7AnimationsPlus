@@ -20,6 +20,9 @@
       "scripts": {
         "parent_setup": "v.chest_layer_visible = 0.0;"
       },
+      "animations": {
+        "offset": "animation.armor.chestplate.offset"
+      },
       "render_controllers": [
         "controller.render.armor.chestplate"
       ]

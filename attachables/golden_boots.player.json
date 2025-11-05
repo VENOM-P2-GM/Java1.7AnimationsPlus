@@ -20,6 +20,9 @@
       "scripts": {
         "parent_setup": "v.boot_layer_visible = 0.0;"
       },
+      "animations": {
+        "offset": "animation.armor.boots.offset"
+      },
       "render_controllers": [
         "controller.render.armor.boots"
       ]

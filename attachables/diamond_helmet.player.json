@@ -20,6 +20,9 @@
       "scripts": {
         "parent_setup": "v.helmet_layer_visible = 0.0;"
       },
+      "animations": {
+        "offset": "animation.armor.helmet.offset"
+      },
       "render_controllers": [
         "controller.render.armor.helmet"
       ]

@@ -15,7 +15,6 @@
       },
       "geometry": {
         "default": "geometry.player.armor.chestplate",
-        //"default": "geometry.player.armor.chestplate",
         "default_custom": "geometry.player_armor_custom"
       },
       "scripts": {

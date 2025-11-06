@@ -2,5 +2,39 @@
 {
   "vignette_renderer": {
     "ignored": true
+  },
+
+  "hud_tip_text": {
+    "alpha": 0
+  },
+  "hud_tip_text/item_text_label": {
+    "shadow": true
+  },
+
+  "hud_actionbar_text": {
+    "alpha": 0
+  },
+  "hud_actionbar_text/actionbar_message": {
+    "shadow": true
+  },
+
+  "hud_title_text/title_frame/title_background": {
+    "ignored": true
+  },
+  "hud_title_text/subtitle_frame/subtitle_background": {
+    "ignored": true
+  },
+  "hud_title_text/title_frame/title": {
+    "shadow": true
+  },
+  "hud_title_text/subtitle_frame/subtitle": {
+    "shadow": true
+  },
+
+  "item_name_text_root/item_text_aligner/item_text_control/item_text_background": {
+    "ignored": true
+  },
+  "item_name_text_root/item_text_aligner/item_text_control/item_text_label": {
+    "shadow": true
   }
 }

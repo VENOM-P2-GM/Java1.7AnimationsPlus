@@ -6,19 +6,15 @@
       "loop" : true,
       "bones" : {
         "rightarm" : {
-          // what I think the java code says - doesnt look right
-          //"position" : [ "math.sin(math.sqrt(v.attack_time) * 180.0) * -3.0", "math.sin(math.sqrt(v.attack_time) * 360.0) * 4.0", "math.sin(v.attack_time * 180.0) * -4.0" ],
-          //"rotation" : [ 0.0, "math.sin(math.sqrt(v.attack_time) * 180.0) * 70.0", "math.sin(v.attack_time * v.attack_time * 180.0) * -20.0" ]
-          
           "position" : [
             "math.sin(math.pow(v.attack_time, 0.5) * 180.0) * -2.6",
             "math.sin(math.pow(v.attack_time, 0.5) * 360.0) * 6.1",
             "math.sin(math.pow(v.attack_time, 1.1) * 180.0) * 3.1"
           ],
           "rotation" : [
-            "math.sin(math.pow(v.attack_time, 0.45) * 180.0) * -56.0",
-            "math.sin(math.pow(v.attack_time, 0.5) * 180.0) * 45.0",
-            "math.sin(math.pow(v.attack_time, 0.3) * 180.0) * 22.5"
+            "math.sin(math.pow(v.attack_time, 0.45) * 180.0) * -52.5",
+            "math.sin(math.pow(v.attack_time, 0.5) * 180.0) * 48.0",
+            "math.sin(math.pow(v.attack_time, 0.3) * 180.0) * 23.5"
           ]
         }
       }

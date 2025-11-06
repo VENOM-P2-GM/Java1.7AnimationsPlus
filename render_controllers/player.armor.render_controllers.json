@@ -22,8 +22,8 @@
       "textures": [ "array.armor_texture[q.armor_texture_slot(0)]" ],
       "part_visibility": [
         { "*": false },
-        { "head": "q.has_armor_slot(0)" },
-        { "hat": "q.has_armor_slot(0)" }
+        { "head_attachable_hurt": "q.has_armor_slot(0)" },
+        { "hat_attachable_hurt": "q.has_armor_slot(0)" }
       ],
       "color": {
         "r": "q.armor_color_slot(0, 0)",
@@ -66,11 +66,11 @@
       "textures": [ "array.armor_texture[q.armor_texture_slot(1)]" ],
       "part_visibility": [
         { "*": false },
-        { "body": "q.has_armor_slot(1)" },
-        { "leftarm": "q.has_armor_slot(1) && (q.armor_texture_slot(1) != 5)" },
-        { "rightarm": "q.has_armor_slot(1) && (q.armor_texture_slot(1) != 5)" },
-        { "left_wing_custom": "q.armor_texture_slot(1) == 5" },
-        { "right_wing_custom": "q.armor_texture_slot(1) == 5" }
+        { "body_attachable_hurt": "q.has_armor_slot(1)" },
+        { "leftarm_attachable_hurt": "q.has_armor_slot(1) && (q.armor_texture_slot(1) != 5)" },
+        { "rightarm_attachable_hurt": "q.has_armor_slot(1) && (q.armor_texture_slot(1) != 5)" },
+        { "left_wing_hurt": "q.armor_texture_slot(1) == 5" },
+        { "right_wing_hurt": "q.armor_texture_slot(1) == 5" }
       ],
       "color": {
         "r": "q.armor_color_slot(1, 0)",
@@ -111,9 +111,9 @@
       "textures": [ "array.armor_texture[q.armor_texture_slot(2)]" ],
       "part_visibility": [
         { "*": false },
-        { "body": "q.has_armor_slot(2)" },
-        { "leftleg": "q.has_armor_slot(2)" },
-        { "rightleg": "q.has_armor_slot(2)" }
+        { "body_attachable_hurt": "q.has_armor_slot(2)" },
+        { "leftleg_attachable_hurt": "q.has_armor_slot(2)" },
+        { "rightleg_attachable_hurt": "q.has_armor_slot(2)" }
       ],
       "color": {
         "r": "q.armor_color_slot(2, 0)",
@@ -154,8 +154,8 @@
       "textures": [ "array.armor_texture[q.armor_texture_slot(3)]" ],
       "part_visibility": [
         { "*": false },
-        { "leftleg": "q.has_armor_slot(3)" },
-        { "rightleg": "q.has_armor_slot(3)" }
+        { "leftleg_attachable_hurt": "q.has_armor_slot(3)" },
+        { "rightleg_attachable_hurt": "q.has_armor_slot(3)" }
       ],
       "color": {
         "r": "q.armor_color_slot(3, 0)",

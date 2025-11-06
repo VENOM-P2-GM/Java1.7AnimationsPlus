@@ -7,9 +7,9 @@
       "bones" : {
         "rightitem": {
           "position": [
-            "math.sin(math.pow(v.attack_time, 0.5) * 180) * -10.0 * (q.main_hand_item_use_duration <= 0.0f)",
-            "((math.sin(math.pow(v.attack_time, 0.5) * 360) * 5.25) + (math.sin(math.pow(v.attack_time, 0.5) * 180) * 6.25)) * (q.main_hand_item_use_duration <= 0.0f ? 1.0 : 0.6)",
-            "math.sin(math.pow(v.attack_time, 1.0) * 180) * 5.0 * (q.main_hand_item_use_duration <= 0.0f)"
+            "(q.main_hand_item_use_duration > 0.0) ? 0.0 : math.sin(math.pow(v.attack_time, 0.5) * 180) * -10.0",
+            "(q.main_hand_item_use_duration > 0.0) ? 0.0 : ((math.sin(math.pow(v.attack_time, 0.5) * 360) * 5.25) + (math.sin(math.pow(v.attack_time, 0.5) * 180) * 6.25))",
+            "(q.main_hand_item_use_duration > 0.0) ? 0.0 : math.sin(math.pow(v.attack_time, 1.0) * 180) * 5.0"
           ],
           "rotation": [
             "math.sin(math.pow(v.attack_time, 0.5) * 180) * -60.0",

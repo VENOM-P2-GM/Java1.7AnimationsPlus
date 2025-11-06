@@ -11,8 +11,18 @@
         "offset": [ 0.0, "math.mod(math.floor(query.life_time * 20), 32) / 32" ], // show first 20 frames in 1 second
         "scale": [ 1.0, 1.0 ]
       },
-      "is_hurt_color": {},
-      "on_fire_color": {},
+      "is_hurt_color": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 0.0
+      },
+      "on_fire_color": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 0.0
+      },
       "light_color_multiplier": 1.35,
       "ignore_lighting": true
     }

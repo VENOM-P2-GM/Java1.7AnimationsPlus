@@ -6,8 +6,18 @@
       "geometry": "geometry.default",
       "materials": [ { "*": "material.default" } ],
       "textures": [ "texture.default" ],
-      "is_hurt_color": {},
-      "on_fire_color": {}
+      "is_hurt_color": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 0.0
+      },
+      "on_fire_color": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 0.0
+      }
     }
   }
 }

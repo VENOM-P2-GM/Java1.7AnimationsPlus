@@ -15,13 +15,18 @@
       ],
       //to prevent flickering in paper doll
       //the cause of this problem has something to do with paper doll framerate being locked
-      "is_hurt_color":{
+      "is_hurt_color": {
         "r": "v.hurt_time = q.life_time; return 0.0;",
         "g": 0.0,
         "b": 0.0,
         "a": 0.0
       },
-      "on_fire_color":{}
+      "on_fire_color": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 0.0
+      }
     },
     "controller.render.player.third_person": {
       "geometry": "geometry.default",
@@ -41,13 +46,18 @@
         { "rightArmArmor": "v.chest_layer_visible && !q.has_cape" },
         { "belt": "v.chest_layer_visible && v.leg_layer_visible" }
       ],
-      "is_hurt_color":{
+      "is_hurt_color": {
         "r": "v.hurt_time = q.life_time; return 1.0;",
         "g": 0.0,
         "b": 0.0,
         "a": 0.6
       },
-      "on_fire_color":{}
+      "on_fire_color": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 0.0
+      }
     },
     "controller.render.player.first_person_spectator": {
       "geometry": "Geometry.default",
@@ -56,13 +66,18 @@
       "part_visibility": [
         { "*": false }
       ],
-      "is_hurt_color":{
+      "is_hurt_color": {
         "r": "v.hurt_time = q.life_time; return 0.0;",
         "g": 0.0,
         "b": 0.0,
         "a": 0.0
       },
-      "on_fire_color":{}
+      "on_fire_color": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 0.0
+      }
     },
     "controller.render.player.third_person_spectator": {
       "geometry": "Geometry.default",
@@ -74,13 +89,18 @@
         { "hat": true },
         { "helmet": "v.helmet_layer_visible && !q.has_head_gear" }
       ],
-      "is_hurt_color":{
+      "is_hurt_color": {
         "r": "v.hurt_time = q.life_time; return 0.0;",
         "g": 0.0,
         "b": 0.0,
         "a": 0.0
       },
-      "on_fire_color":{},
+      "on_fire_color": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 0.0
+      },
       "color": {
         "r": "1.0f",
         "g": "1.0f",
@@ -98,13 +118,18 @@
         { "hat": true },
         { "helmet": "!q.has_head_gear" }
       ],
-      "is_hurt_color":{
+      "is_hurt_color": {
         "r": "v.hurt_time = q.life_time; return 1.0;",
         "g": 0.0,
         "b": 0.0,
         "a": 0.6
       },
-      "on_fire_color":{}
+      "on_fire_color": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 0.0
+      }
     }
   }
 }

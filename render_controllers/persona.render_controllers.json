@@ -18,13 +18,18 @@
         "offset": [ 0.0, "v.use_blinking_animation ? v.is_blinking * 0.5 : Math.mod(Math.floor(q.life_time * 7),v.animation_frames_face)/v.animation_frames_face" ],
         "scale": [ 1.0, 1.0 ]
       },
-      "is_hurt_color":{
+      "is_hurt_color": {
         "r": "v.hurt_time = q.life_time; return 0.0;",
         "g": 0.0,
         "b": 0.0,
         "a": 0.0
       },
-      "on_fire_color":{}
+      "on_fire_color": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 0.0
+      }
     },
     "controller.render.persona_animated_32x32.first_person": {
       "rebuild_animation_matrices": true,
@@ -42,13 +47,18 @@
         "offset": [ 0.0, "Math.mod(Math.floor(q.life_time * 7),v.animation_frames_32x32)/v.animation_frames_32x32" ],
         "scale": [ 1.0, 1.0 ]
       },
-      "is_hurt_color":{
+      "is_hurt_color": {
         "r": "v.hurt_time = q.life_time; return 0.0;",
         "g": 0.0,
         "b": 0.0,
         "a": 0.0
       },
-      "on_fire_color":{}
+      "on_fire_color": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 0.0
+      }
     },
     "controller.render.persona_animated_128x128.first_person": {
       "rebuild_animation_matrices": true,
@@ -66,13 +76,18 @@
         "offset": [ 0.0, "Math.mod(Math.floor(q.life_time * 7),v.animation_frames_128x128)/v.animation_frames_128x128" ],
         "scale": [ 1.0, 1.0 ]
       },
-      "is_hurt_color":{
+      "is_hurt_color": {
         "r": "v.hurt_time = q.life_time; return 0.0;",
         "g": 0.0,
         "b": 0.0,
         "a": 0.0
       },
-      "on_fire_color":{}
+      "on_fire_color": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 0.0
+      }
     },
     "controller.render.persona_animated_face.third_person": {
       "rebuild_animation_matrices": true,
@@ -107,13 +122,18 @@
         "b": "1.0f",
         "a": "0.3f"
       },
-      "is_hurt_color":{
+      "is_hurt_color": {
         "r": "v.hurt_time = q.life_time; return 0.7;",
         "g": 0.0,
         "b": 0.0,
         "a": 0.5
       },
-      "on_fire_color":{}
+      "on_fire_color": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 0.0
+      }
     },
     "controller.render.persona_animated_32x32.third_person": {
       "rebuild_animation_matrices": true,
@@ -148,13 +168,18 @@
         "b": "1.0f",
         "a": "0.3f"
       },
-      "is_hurt_color":{
+      "is_hurt_color": {
         "r": "v.hurt_time = q.life_time; return 0.7;",
         "g": 0.0,
         "b": 0.0,
         "a": 0.5
       },
-      "on_fire_color":{}
+      "on_fire_color": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 0.0
+      }
     },
     "controller.render.persona_animated_128x128.third_person": {
       "rebuild_animation_matrices": true,
@@ -189,13 +214,18 @@
         "b": "1.0f",
         "a": "0.3f"
       },
-      "is_hurt_color":{
+      "is_hurt_color": {
         "r": "v.hurt_time = q.life_time; return 0.7;",
         "g": 0.0,
         "b": 0.0,
         "a": 0.5
       },
-      "on_fire_color":{}
+      "on_fire_color": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 0.0
+      }
     },
     "controller.render.player.map.persona": {
       "arrays": {
@@ -216,13 +246,18 @@
         "offset": [ 0.0, "v.is_blinking * 0.5" ],
         "scale": [ 1.0, 1.0 ]
       },
-      "is_hurt_color":{
+      "is_hurt_color": {
         "r": "v.hurt_time = q.life_time; return 0.7;",
         "g": 0.0,
         "b": 0.0,
         "a": 0.5
       },
-      "on_fire_color":{}
+      "on_fire_color": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 0.0
+      }
     }
   }
 }

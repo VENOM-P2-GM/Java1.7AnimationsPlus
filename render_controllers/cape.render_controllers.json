@@ -3,7 +3,7 @@
   "format_version": "1.10.0",
   "render_controllers": {
     "controller.render.player.cape": {
-      "geometry": "q.is_emoting ? geometry.cape : geometry.cape_root_parent",
+      "geometry": "(q.is_emoting || v.is_in_menu) ? geometry.cape : geometry.cape_root_parent",
       "materials": [ { "*": "material.cape" } ],
       "textures": [ "texture.cape" ],
       "part_visibility": [

@@ -15,9 +15,16 @@
         { "name": "root", "pivot": [0, 0, 0] },
         { "name": "waist", "parent": "root", "pivot": [0, 12, 0] },
         { "name": "body", "parent": "waist", "pivot": [0, 24, 0] },
-        { "name": "body_custom", "parent": "body", "pivot": [0, 24, 0] },
-        { "name": "left_wing", "parent": "body_custom", "pivot": [0, 20, 0], "cubes": [ {"origin": [-10, 0, 0], "size": [10, 20, 2], "uv": [22, 0]} ] },
-        { "name": "right_wing", "parent": "body_custom", "pivot": [0, 20, 0], "mirror": true, "cubes": [ {"origin": [0, 0, 0], "size": [10, 20, 2], "uv": [22, 0]} ] }
+
+        // Is this skeletal heirarchy hardcoded? Injecting `left_wing_attachable` and `right_wing_attachable` causes the model to be invisible.
+        /*
+        { "name": "left_wing_attachable", "parent": "body", "pivot": [0, 20, 0], "cubes": [ {"origin": [-10, 0, 0], "size": [10, 20, 2], "uv": [22, 0]} ] },
+        { "name": "left_wing", "parent": "left_wing_attachable" },
+        { "name": "right_wing_attachable", "parent": "body", "pivot": [0, 20, 0], "mirror": true, "cubes": [ {"origin": [0, 0, 0], "size": [10, 20, 2], "uv": [22, 0]} ] },
+        { "name": "right_wing", "parent": "right_wing_attachable" }
+         */
+        { "name": "left_wing", "parent": "body", "pivot": [0, 20, 0], "cubes": [ {"origin": [-10, 0, 0], "size": [10, 20, 2], "uv": [22, 0]} ] },
+        { "name": "right_wing", "parent": "body", "pivot": [0, 20, 0], "mirror": true, "cubes": [ {"origin": [0, 0, 0], "size": [10, 20, 2], "uv": [22, 0]} ] }
       ]
     },
     {
@@ -33,9 +40,8 @@
         { "name": "root", "pivot": [0, 0, 0] },
         { "name": "waist", "parent": "root", "pivot": [0, 12, 0] },
         { "name": "body", "parent": "waist", "pivot": [0, 24, 0] },
-        { "name": "body_custom", "parent": "body", "pivot": [0, 24, 0] },
-        { "name": "left_wing_custom", "parent": "body_custom", "pivot": [0, 20, 0], "cubes": [ {"origin": [-10, 0, 0], "size": [10, 20, 2], "uv": [22, 0]} ] },
-        { "name": "right_wing_custom", "parent": "body_custom", "pivot": [0, 20, 0], "mirror": true, "cubes": [ {"origin": [0, 0, 0], "size": [10, 20, 2], "uv": [22, 0]} ] }
+        { "name": "left_wing_custom", "parent": "body", "pivot": [0, 20, 0], "cubes": [ {"origin": [-10, 0, 0], "size": [10, 20, 2], "uv": [22, 0]} ] },
+        { "name": "right_wing_custom", "parent": "body", "pivot": [0, 20, 0], "mirror": true, "cubes": [ {"origin": [0, 0, 0], "size": [10, 20, 2], "uv": [22, 0]} ] }
       ]
     }
   ]

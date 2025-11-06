@@ -62,8 +62,8 @@
       "part_visibility": [
         { "*": false },
         { "body": "q.has_armor_slot(1)" },
-        { "leftarm_custom": "q.has_armor_slot(1) && (q.armor_texture_slot(1) != 5)" },
-        { "rightarm_custom": "q.has_armor_slot(1) && (q.armor_texture_slot(1) != 5)" },
+        { "leftarm": "q.has_armor_slot(1) && (q.armor_texture_slot(1) != 5)" },
+        { "rightarm": "q.has_armor_slot(1) && (q.armor_texture_slot(1) != 5)" },
         { "left_wing_custom": "q.armor_texture_slot(1) == 5" },
         { "right_wing_custom": "q.armor_texture_slot(1) == 5" }
       ],

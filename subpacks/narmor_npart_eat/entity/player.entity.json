@@ -235,7 +235,7 @@
 
         { "controller.render.player.cape_custom": "!v.is_first_person && !v.map_face_icon && !q.is_spectator" },
         { "controller.render.player.fire": "!v.is_first_person && !v.map_face_icon && q.is_alive && q.is_on_fire && !q.is_spectator" }
-        //{ "controller.render.player.armor.attachable_bones": "(q.equipment_count > 0) && !q.is_spectator" },
+        //{ "controller.render.player.armor.attachable_bones": "(q.has_armor_slot(0) || q.has_armor_slot(1) || q.has_armor_slot(3)) && !q.is_spectator" },
         //{ "controller.render.player.armor.attachable_bones_elytra": "(q.armor_texture_slot(1) == 5) && !q.is_spectator" },
         //{ "controller.render.player.armor.attachable_bones_leggings": "q.has_armor_slot(2) && !q.is_spectator" },
         //{ "controller.render.player.armor.helmet": "!v.is_first_person && !v.map_face_icon && (v.hurt_time > 0.0) && !q.is_invisible && q.has_armor_slot(0) && !q.is_spectator" },

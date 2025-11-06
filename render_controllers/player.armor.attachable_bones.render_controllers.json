@@ -28,6 +28,6 @@
     }
   }
 }
-//just so the attachables recognize this geo as the parent
-//this way we can manipulate it from the player in response to
-//variables that live on the player, without affecting the "hurt" geo
+
+// These render controllers are needed so that the armor attachables recognize this geoemtry as the parent.
+// This way, we can manipulate them from within the player entity in response to, variables that live on the player, without affecting the "hurt" geometry.

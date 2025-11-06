@@ -12,9 +12,6 @@
         { "hat_attachable": true }
       ]
     },
-    //these custom bones are needed because alex and steve arms have different pivots.
-    //a custom bone needs to be made for each arm so both slim arm and regular
-    //skins can have the same positioning when wearing armor (also for the sake of java parity)
     "controller.render.armor.chestplate": {
       "geometry": "geometry.default_custom",
       "materials": [ { "*": "v.is_enchanted ? material.enchanted : material.default" } ],
@@ -22,12 +19,12 @@
       "part_visibility": [
         { "*": false },
         { "body_attachable": true },
-        { "leftarm_custom_attachable": true },
-        { "rightarm_custom_attachable": true }
+        { "leftarm_attachable": true },
+        { "rightarm_attachable": true }
       ]
     },
     "controller.render.armor.elytra": {
-      "geometry": "geometry.default", // geometry.default_custom (use geometry.default to prevent random log errors)
+      "geometry": "geometry.default", // "geometry.default" is hardcoded for the elytra
       "materials": [ { "*": "v.is_enchanted ? material.enchanted : material.default" } ],
       "textures": [ "v.has_trim ? v.trim_path : texture.default", "texture.enchanted" ],
       "part_visibility": [

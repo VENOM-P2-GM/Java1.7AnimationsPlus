@@ -16,7 +16,7 @@
         "default": "geometry.player_elytra_custom" // "default_custom", the elytra has some weird hardcoded behavior where the friendly name must be called "default"
       },
       "animations": {
-        "default_controller": "controller.animation.elytra.default",
+        "default_controller": "controller.animation.elytra",
         "default": "animation.elytra.default",
         "gliding": "animation.elytra.gliding",
         "sneaking": "animation.elytra.sneaking"
@@ -46,4 +46,3 @@
     }
   }
 }
-// elytra is immune to requiring any emote workarounds because it only affects the body, which has been unchanged

@@ -96,14 +96,16 @@
           "v.elytra_tilt_ratio = 0.0;",
           "v.elytra_glide_amount = 0.0;",
           "v.elytra_sneak_amount = 0.0;",
-          "v.is_valid_player = 0.0;"
+          "v.is_valid_player = 0.0;",
+          "v.head_rot_detached_from_camera = 0.0;"
         ],
         "pre_animation": [
           // Restrict certain player entities from updating variables that are based on historical values.
           "v.is_valid_player = !q.is_in_ui && !v.is_paperdoll;",
 
           "v.is_in_menu = (q.time_stamp <= 0);",
-          "v.is_valid_player ? { t.detached_from_camera = (v.is_first_person || q.is_sleeping || q.is_riding || q.is_gliding || q.is_swimming || q.is_crawling || v.damage_nearby_mobs); v.looks_at_camera_eased = v.looks_at_camera_eased + (t.detached_from_camera - v.looks_at_camera_eased) * (1 - math.pow((1 - 0.8), q.delta_time / 0.2)); };",
+          "v.head_rot_detached_from_camera = (q.is_sleeping || q.is_riding || q.is_gliding || q.is_swimming || q.is_crawling || v.damage_nearby_mobs);",
+          "v.is_valid_player ? { v.looks_at_camera_eased = v.looks_at_camera_eased + (((v.is_first_person || v.head_rot_detached_from_camera) ? 1.0 : 0.0) - v.looks_at_camera_eased) * (1 - math.pow((1 - 0.8), q.delta_time / 0.2)); };",
           
           // BUG: scoping spyglass in 1st person makes the new limb animation freeze, I don't how to fix this.
           "v.is_valid_player ? { t.normalized_vertical_speed = math.clamp(math.pow(math.abs(q.position_delta(1) + 0.0784), 0.225) * 1.175, 0, 0.785); v.vertical_speed = v.vertical_speed + (t.normalized_vertical_speed - v.vertical_speed) * (1 - math.pow((1 - 0.85), q.delta_time / 0.15)); };",
@@ -111,7 +113,7 @@
           "v.is_valid_player ? { v.modified_move_speed = v.modified_move_speed + ((v.raw_move_speed - v.modified_move_speed) * (1 - math.pow((1 - 0.8), q.delta_time / 0.2))); };",
           "v.is_valid_player ? { v.modified_distance_moved = v.modified_distance_moved + (v.modified_move_speed * q.delta_time * 20); };",
           
-          "v.is_valid_player ? { t.rot_y_delta = q.body_y_rotation - q.head_y_rotation(0); v.relative_cape_rotation = (q.is_sleeping || q.is_in_ui) ? 0 : (v.modified_move_speed * (math.sqrt(v.modified_move_speed) - math.sqrt(q.cape_flap_amount)) * math.sin(t.rot_y_delta)); };",
+          "v.is_valid_player ? { t.rot_y_delta = q.body_y_rotation - q.head_y_rotation(0); v.relative_cape_rotation = q.is_sleeping ? 0 : (v.modified_move_speed * (math.sqrt(v.modified_move_speed) - math.sqrt(q.cape_flap_amount)) * math.sin(t.rot_y_delta)); };",
           "v.is_valid_player ? { v.elytra_tilt_ratio = (q.position_delta(1) < 0) ? 1 - math.pow(-q.movement_direction(1), 1.5) : 1; };",
           "v.is_valid_player ? { t.lerp_pct = 0.8; t.lerp_time = 0.2; v.elytra_glide_amount = v.elytra_glide_amount + (q.is_gliding - v.elytra_glide_amount) * (1 - math.pow((1 - t.lerp_pct), q.delta_time / t.lerp_time)); };",
           "v.is_valid_player ? { t.lerp_pct = 0.8; t.lerp_time = 0.2; t.is_only_sneaking = q.is_sneaking && !q.is_gliding && !q.is_swimming; v.elytra_sneak_amount = v.elytra_sneak_amount + (t.is_only_sneaking - v.elytra_sneak_amount) * (1 - math.pow((1 - t.lerp_pct), q.delta_time / t.lerp_time)); };",
@@ -134,7 +136,7 @@
           "compute_swim_crawl_amount_exclusive",
           { "elytra_controller": "(v.hurt_time > 0.0) && (q.armor_texture_slot(1) == 5)" },
           { "disable_attachables": "(v.hurt_time > 0.0) && !q.is_invisible" },
-          { "interpolated_yaw": "q.is_local_player && v.is_valid_player && !q.is_sleeping && !q.is_riding && !q.is_gliding && !q.is_swimming && !q.is_crawling && !v.damage_nearby_mobs" }
+          { "interpolated_yaw": "q.is_local_player && v.is_valid_player && !v.head_rot_detached_from_camera" }
         ]
       },
       "particle_effects":{

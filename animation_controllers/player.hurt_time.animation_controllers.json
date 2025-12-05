@@ -15,7 +15,7 @@
         },
         "test_hurt_time": {
           "transitions": [
-            { "reset_hurt_time": "q.approx_eq(v.previous_hurt_time, v.hurt_time)" }, // value stopped updating, we can assume the hurt animation is done
+            { "reset_hurt_time": "q.approx_eq(v.previous_hurt_time, v.hurt_time)" }, // Variable stopped updating, we can assume the hurt animation is done.
             { "default": "1.0" }
           ]
         },
@@ -29,27 +29,25 @@
         }
       }
     },
+
+    // BUG: `is_hurt_color` doesn't evaluate when player is invisible, so damage particles won't show in this circumstance.
     "controller.animation.player.hurt_particle": {
       "initial_state": "default",
       "states": {
         "default": {
           "transitions": [
-             // BUG: is_hurt_color doesn't evaluate when player is invisible, so damage particles won't show in this circumstance
             { "emit": "v.hurt_time > 0.0" }
           ]
         },
         "emit": {
-          "on_entry":[
-            "v.hurt_particle_time = q.life_time;"
-          ],
-          /*"particle_effects": [ // causes some weird delay when emitted directly from AC
+          /*"particle_effects": [
             { "effect": "hurt" }
           ],*/
-          "animations":[
+          "animations": [
             "emit_hurt_particle"
           ],
           "transitions": [
-            { "default": "(q.life_time - v.hurt_particle_time >= 0.5) && q.is_alive" }
+            { "default": "v.hurt_time <= 0.0" }
           ]
         }
       }

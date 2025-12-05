@@ -1,21 +1,31 @@
 // This file was modified by ambient (ambiennt on discord). Do not use or redistribute this file or its contents without explicit permission from the author.
 {
-  "format_version" : "1.10.0",
-  "animations" : {
-    "animation.player.attack.rotations" : {
-      "loop" : true,
-      "bones" : {
-        "body" : {
-          "rotation" : [ 0.0, "v.attack_body_rot_y", "q.is_sneaking ? v.attack_body_rot_y * -0.4 : 0" ]
+  "format_version": "1.10.0",
+  "animations": {
+    "animation.player.attack.rotations": {
+      "loop": true,
+      "bones": {
+        "body": {
+          "rotation": [ 0.0, "v.attack_body_rot_y", "q.is_sneaking ? v.attack_body_rot_y * -0.4 : 0.0" ]
         },
-        "leftarm" : {
-          "rotation" : [ "v.attack_body_rot_y", 0.0, 0.0 ]
+        "leftarm": {
+          "rotation": [ "v.attack_body_rot_y", 0.0, 0.0 ]
         },
-        "rightarm" : {
-          //exact implementation from java edition doesnt look the same in bedrock because v.attack_time updates differently...
-          //v.attack_time -> math.pow(v.attack_time, 0.85)
-          "rotation" : [
+        "leftarm_custom": {
+          "rotation": [ "v.attack_body_rot_y", 0.0, 0.0 ]
+        },
+        "rightarm": {
+          // The exact implementation from MCJE doesnt look the same in MCBE because the attack update variable (i.e. `v.attack_time`) updates differently...
+          // v.attack_time -> math.pow(v.attack_time, 0.85)
+          "rotation": [
             //"t.f1 = math.sin(1 - (math.pow(1 - v.attack_time, 3)) * 180); t.f2 = math.sin(v.attack_time * 180) * (q.head_x_rotation(0) - 40.1070456592) * 0.75; return t.f1 * 68.7549354157 + t.f2;",
+            "math.sin(1 - (math.pow(1 - math.pow(v.attack_time, 0.85), 3)) * 180) * 68.7549354157 + math.sin(math.pow(v.attack_time, 0.85) * 180) * (q.head_x_rotation(0) - 40.1070456592) * 0.75",
+            "v.attack_body_rot_y * 2.0",
+            "math.sin(v.attack_time * 180) * -22.9183118052"
+          ]
+        },
+        "rightarm_custom": {
+          "rotation": [
             "math.sin(1 - (math.pow(1 - math.pow(v.attack_time, 0.85), 3)) * 180) * 68.7549354157 + math.sin(math.pow(v.attack_time, 0.85) * 180) * (q.head_x_rotation(0) - 40.1070456592) * 0.75",
             "v.attack_body_rot_y * 2.0",
             "math.sin(v.attack_time * 180) * -22.9183118052"
@@ -23,181 +33,263 @@
         }
       }
     },
-    "animation.player.cape" : {
-      "loop" : true,
-      "bones" : {
-        "cape" : {
-          "position" : [ 0.0, "q.get_root_locator_offset('armor_offset.default_neck', 1)", 0.0 ],
-          "rotation" : [
-            "t.oscillation_amount = (q.is_sneaking ? 0 : math.sin(v.modified_distance_moved * 55.0) * 3.0 * (1.0 - v.swim_amount) * v.modified_move_speed); return (v.is_in_menu ? -6.0 : (q.is_sleeping ? 0 : math.clamp((q.cape_flap_amount * -110.25) - t.oscillation_amount - 0.75, -180.0, -1.5)));",
+    "animation.player.cape": {
+      "loop": true,
+      "bones": {
+        "cape": {
+          "position": [ 0.0, "q.get_root_locator_offset('armor_offset.default_neck', 1)", 0.0 ],
+          "rotation": [
+            "t.oscillation_amount = (q.is_sneaking ? 0.0 : math.sin(v.modified_distance_moved * 55.0) * 3.0 * (1.0 - v.swim_amount) * v.modified_move_speed); return (v.is_in_menu ? -6.0 : (q.is_sleeping ? 0 : math.clamp((q.cape_flap_amount * -110.25) - t.oscillation_amount - 0.75, -180.0, -1.5)));",
             "v.relative_cape_rotation * 60.0;",
             "v.relative_cape_rotation * -45.0"
           ]
         }
       }
     },
-    "animation.player.sneaking" : {
-      "loop" : true,
-      "bones" : {
-        "body" : {
-          "position" : [ 0.0, -2.2, 0.8 ]
+    "animation.player.sneaking": {
+      "loop": true,
+      "bones": {
+        "body": {
+          "position": [ 0.0, -2.2, 0.8 ]
         },
-        "cape" : {
-          "position" : [ 0.0, -2.2, 0.8 ]
+        "cape": {
+          "position": [ 0.0, -2.2, 0.8 ]
         },
-        "head" : {
-          "position" : [ 0.0, -1.0, 0.0 ]
+        "head": {
+          "position": [ 0.0, -1.0, 0.0 ]
         },
-        "leftarm" : {
-          "rotation" : [ -5.7, 0.0, 0.0 ]
+        "leftarm": {
+          "rotation": [ -5.7, 0.0, 0.0 ]
         },
-        "leftleg" : {
-          "rotation" : [ -28.0, 0.0, 0.0 ]
+        "leftarm_custom": {
+          "rotation": [ -5.7, 0.0, 0.0 ]
         },
-        "rightarm" : {
-          "rotation" : [ -5.7, 0.0, 0.0 ]
+        "leftleg": {
+          "rotation": [ -28.0, 0.0, 0.0 ]
         },
-        "rightleg" : {
-          "rotation" : [ -28.0, 0.0, 0.0 ]
+        "rightarm": {
+          "rotation": [ -5.7, 0.0, 0.0 ]
         },
-        "root" : {
-          "position" : [ 0.0, 1.25, 9.0 ],
-          "rotation" : [ "28.0 - this", 0.0, 0.0 ]
+        "rightarm_custom": {
+          "rotation": [ -5.7, 0.0, 0.0 ]
+        },
+        "rightleg": {
+          "rotation": [ -28.0, 0.0, 0.0 ]
+        },
+        "root": {
+          "position": [ 0.0, 1.25, 9.0 ],
+          "rotation": [ "28.0 - this", 0.0, 0.0 ]
         }
       }
     },
-    "animation.player.bob" : {
-      "loop" : true,
-      "bones" : {
-        "leftarm" : {
-          "rotation" : [ "math.sin(q.life_time * 76.7763445475) * 2.86478897565", 0.0, "-((math.cos(q.life_time * 103.132403124) * 2.86478897565) + 2.86478897565)" ]
+    "animation.player.bob": {
+      "loop": true,
+      "bones": {
+        "leftarm": {
+          "rotation": [ "math.sin(q.life_time * 76.7763445475) * 2.86478897565", 0.0, "-((math.cos(q.life_time * 103.132403124) * 2.86478897565) + 2.86478897565)" ]
         },
-        "rightarm" : {
-          "rotation" : [ "-math.sin(q.life_time * 76.7763445475) * 2.86478897565", 0.0, "(math.cos(q.life_time * 103.132403124) * 2.86478897565) + 2.86478897565" ]
+        "leftarm_custom": {
+          "rotation": [ "math.sin(q.life_time * 76.7763445475) * 2.86478897565", 0.0, "-((math.cos(q.life_time * 103.132403124) * 2.86478897565) + 2.86478897565)" ]
+        },
+        "rightarm": {
+          "rotation": [ "-math.sin(q.life_time * 76.7763445475) * 2.86478897565", 0.0, "(math.cos(q.life_time * 103.132403124) * 2.86478897565) + 2.86478897565" ]
+        },
+        "rightarm_custom": {
+          "rotation": [ "-math.sin(q.life_time * 76.7763445475) * 2.86478897565", 0.0, "(math.cos(q.life_time * 103.132403124) * 2.86478897565) + 2.86478897565" ]
         }
       }
     },
-    "animation.player.holding" : {
-      "loop" : true,
-      "bones" : {
-        "leftarm" : {
-          "rotation" : [ "(v.is_holding_left && (q.is_item_name_any('slot.weapon.mainhand', 'minecraft:bow', 'minecraft:crossbow') ? !q.item_is_charged && (v.item_use_normalized <= 0.0) : 1.0) || (q.item_is_charged && (v.attack_time > 0.0))) ? (-this * 0.5 - 18.0) : 0.0", 0.0, 0.0 ]
+    "animation.player.holding": {
+      "loop": true,
+      "bones": {
+        "leftarm": {
+          "rotation": [ "(v.is_holding_left && (q.is_item_name_any('slot.weapon.mainhand', 'minecraft:bow', 'minecraft:crossbow') ? !q.item_is_charged && (v.item_use_normalized <= 0.0) : 1.0) || (q.item_is_charged && (v.attack_time > 0.0))) ? ((-this * 0.5) - 18.0) : 0.0", 0.0, 0.0 ]
         },
-        "rightarm" : {
-          "rotation" : [ "v.is_holding_right ? (-this * 0.5 - 18.0) : 0.0", 0.0, 0.0 ]
+        "leftarm_custom": {
+          "rotation": [ "(v.is_holding_left && (q.is_item_name_any('slot.weapon.mainhand', 'minecraft:bow', 'minecraft:crossbow') ? !q.item_is_charged && (v.item_use_normalized <= 0.0) : 1.0) || (q.item_is_charged && (v.attack_time > 0.0))) ? ((-this * 0.5) - 18.0) : 0.0", 0.0, 0.0 ]
+        },
+        "rightarm": {
+          "rotation": [ "v.is_holding_right ? ((-this * 0.5) - 18.0) : 0.0", 0.0, 0.0 ]
+        },
+        "rightarm_custom": {
+          "rotation": [ "v.is_holding_right ? ((-this * 0.5) - 18.0) : 0.0", 0.0, 0.0 ]
         }
       }
     },
-    "animation.player.move.arms" : {
-      "loop" : true,
-      "bones" : {
-        "leftarm" : {
-          "rotation" : [ "v.tcos0 * (1.0 - v.swim_amount)", 0.0, 0.0 ]
+    "animation.player.move.arms": {
+      "loop": true,
+      "bones": {
+        "leftarm": {
+          "rotation": [ "v.tcos0 * (1.0 - v.swim_amount)", 0.0, 0.0 ]
         },
-        "rightarm" : {
-          "rotation" : [ "-v.tcos0 * (1.0 - v.swim_amount)", 0.0, 0.0 ]
+        "leftarm_custom": {
+          "rotation": [ "v.tcos0 * (1.0 - v.swim_amount)", 0.0, 0.0 ]
+        },
+        "rightarm": {
+          "rotation": [ "-v.tcos0 * (1.0 - v.swim_amount)", 0.0, 0.0 ]
+        },
+        "rightarm_custom": {
+          "rotation": [ "-v.tcos0 * (1.0 - v.swim_amount)", 0.0, 0.0 ]
         }
       }
     },
-    "animation.player.move.legs" : {
-      "loop" : true,
-      "bones" : {
-        "leftleg" : {
-          "rotation" : [ "v.tcos0 * -1.4 * (1.0 - v.swim_amount)", 0.0, 0.0 ]
+    "animation.player.move.legs": {
+      "loop": true,
+      "bones": {
+        "leftleg": {
+          "rotation": [ "v.tcos0 * -1.4 * (1.0 - v.swim_amount)", 0.0, 0.0 ]
         },
-        "rightleg" : {
-          "rotation" : [ "v.tcos0 * 1.4 * (1.0 - v.swim_amount)", 0.0, 0.0 ]
+        "rightleg": {
+          "rotation": [ "v.tcos0 * 1.4 * (1.0 - v.swim_amount)", 0.0, 0.0 ]
         }
       }
     },
-    "animation.player.riding.arms" : {
-      "loop" : true,
-      "bones" : {
-        "leftarm" : {
-          "rotation" : [ -36.0, 0.0, 0.0 ]
+    "animation.player.riding.arms": {
+      "loop": true,
+      "bones": {
+        "leftarm": {
+          "rotation": [ -36.0, 0.0, 0.0 ]
         },
-        "rightarm" : {
-          "rotation" : [ -36.0, 0.0, 0.0 ]
+        "leftarm_custom": {
+          "rotation": [ -36.0, 0.0, 0.0 ]
+        },
+        "rightarm": {
+          "rotation": [ -36.0, 0.0, 0.0 ]
+        },
+        "rightarm_custom": {
+          "rotation": [ -36.0, 0.0, 0.0 ]
         }
       }
     },
-    "animation.player.riding.legs" : {
-      "loop" : true,
-      "bones" : {
-        "leftleg" : {
-          "rotation" : [ "-72.0 - this", "-18.0 - this", "-this" ]
+    "animation.player.riding.legs": {
+      "loop": true,
+      "bones": {
+        "leftleg": {
+          "rotation": [ "-72.0 - this", "-18.0 - this", "-this" ]
         },
-        "rightleg" : {
-          "rotation" : [ "-72.0 - this", "18.0 - this", "-this" ]
+        "rightleg": {
+          "rotation": [ "-72.0 - this", "18.0 - this", "-this" ]
         }
       }
     },
-    "animation.player.bow_equipped" : {
-      "loop" : true,
-      "bones" : {
-        "leftarm" : {
-          "rotation": [ "v.item_use_normalized > 0.0f ? -90.0 + q.target_x_rotation - (q.is_sneaking * 20.0) : 0.0", "v.item_use_normalized > 0.0f ? 27.5 + q.target_y_rotation : 0.0", 0.0 ]
-        },
-        "rightarm" : { // - 90.0 + 18.0
-          "rotation": [ "v.item_use_normalized > 0.0f ? -72.0 + q.target_x_rotation - (q.is_sneaking * 20.0) : 0.0", "v.item_use_normalized > 0.0f ? -5.0 + q.target_y_rotation : 0.0", 0.0 ]
-        }
-      }
-    },
-    "animation.player.crossbow_equipped" : { // crossbow charging
-      "loop" : true,
-      "bones" : {
-        "leftarm" : {
-          "rotation" : [
-            "-60.0 - (1.0 - v.item_use_normalized) * 25.0",
-            "15.0 + (1.0 - v.item_use_normalized) * 35.0",
-            "-5.0 + (1.0 - v.item_use_normalized) * 10.0"
+    "animation.player.bow_equipped": {
+      "loop": true,
+      "bones": {
+        "leftarm": {
+          "rotation": [
+            "(v.item_use_normalized > 0.0) ? -90.0 + q.target_x_rotation - (q.is_sneaking * 20.0) : 0.0",
+            "(v.item_use_normalized > 0.0) ? 27.5 + q.target_y_rotation : 0.0",
+            0.0
           ]
         },
-        "rightarm" : {
-          "rotation" : [ -35.0, -45.0, 0.0 ]
+        "leftarm_custom": {
+          "rotation": [
+            "(v.item_use_normalized > 0.0) ? -90.0 + q.target_x_rotation - (q.is_sneaking * 20.0) : 0.0",
+            "(v.item_use_normalized > 0.0) ? 27.5 + q.target_y_rotation : 0.0",
+            0.0
+          ]
+        },
+        "rightarm": {
+          "rotation": [
+            "(v.item_use_normalized > 0.0) ? -72.0 + q.target_x_rotation - (q.is_sneaking * 20.0) : 0.0", // - 90.0 + 18.0
+            "(v.item_use_normalized > 0.0) ? -5.0 + q.target_y_rotation : 0.0",
+            0.0
+          ]
+        },
+        "rightarm_custom": {
+          "rotation": [
+            "(v.item_use_normalized > 0.0) ? -72.0 + q.target_x_rotation - (q.is_sneaking * 20.0) : 0.0",
+            "(v.item_use_normalized > 0.0) ? -5.0 + q.target_y_rotation : 0.0",
+            0.0
+          ]
         }
       }
     },
-    "animation.player.crossbow_hold" : { // charged crossbow holding
-      "loop" : true,
-      "bones" : {
-        "leftarm" : {
-          "rotation" : [
+    "animation.player.crossbow_equipped": { // crossbow charging
+      "loop": true,
+      "bones": {
+        "leftarm": {
+          "rotation": [
+            "-60.0 - ((1.0 - v.item_use_normalized) * 25.0)",
+            "15.0 + ((1.0 - v.item_use_normalized) * 35.0)",
+            "-5.0 + ((1.0 - v.item_use_normalized) * 10.0)"
+          ]
+        },
+        "leftarm_custom": {
+          "rotation": [
+            "-60.0 - ((1.0 - v.item_use_normalized) * 25.0)",
+            "15.0 + ((1.0 - v.item_use_normalized) * 35.0)",
+            "-5.0 + ((1.0 - v.item_use_normalized) * 10.0)"
+          ]
+        },
+        "rightarm": {
+          "rotation": [ -35.0, -45.0, 0.0 ]
+        },
+        "rightarm_custom": {
+          "rotation": [ -35.0, -45.0, 0.0 ]
+        }
+      }
+    },
+    "animation.player.crossbow_hold": { // charged crossbow holding
+      "loop": true,
+      "bones": {
+        "leftarm": {
+          "rotation": [
             "-85.0 + q.target_x_rotation",
             "32.5 + math.clamp(q.target_y_rotation, -50.0, 50.0)",
             0.0
           ]
         },
-        "rightarm" : {
-          "rotation" : [
-            "-85.0 + q.target_x_rotation + 18",
+        "leftarm_custom": {
+          "rotation": [
+            "-85.0 + q.target_x_rotation",
+            "32.5 + math.clamp(q.target_y_rotation, -50.0, 50.0)",
+            0.0
+          ]
+        },
+        "rightarm": {
+          "rotation": [
+            "-85.0 + q.target_x_rotation + 18.0",
+            "math.clamp(q.target_y_rotation, -50.0, 50.0) - 17.5",
+            0.0
+          ]
+        },
+        "rightarm_custom": {
+          "rotation": [
+            "-85.0 + q.target_x_rotation + 18.0",
             "math.clamp(q.target_y_rotation, -50.0, 50.0) - 17.5",
             0.0
           ]
         }
       }
     },
-    "animation.player.shield_block_main_hand" : {
-      "loop" : true,
-      "bones" : {
-        "rightarm" : {
-          "rotation" : [ -45.0, -30.0, 15.0 ]
+    "animation.player.shield_block_main_hand": {
+      "loop": true,
+      "bones": {
+        "rightarm": {
+          "rotation": [ -45.0, -30.0, 15.0 ]
         },
-        "rightitem" : { // yes this should be in the shield attachable file but I dont want to add 2 new animations
-          "position" : [ -1.5, -3.0, 1.5 ],
-          "rotation" : [ -25.0, -30.0, -40.0 ]
+        "rightarm_custom": {
+          "rotation": [ -45.0, -30.0, 15.0 ]
+        },
+        "rightitem": { // yes this should be in the shield attachable file but I dont want to add 2 new animations
+          "position": [ -1.5, -3.0, 1.5 ],
+          "rotation": [ -25.0, -30.0, -40.0 ]
         }
       }
     },
-    "animation.player.shield_block_off_hand" : {
-      "loop" : true,
-      "bones" : {
-        "leftarm" : {
-          "rotation" : [ -45.0, 30.0, -15.0 ]
+    "animation.player.shield_block_off_hand": {
+      "loop": true,
+      "bones": {
+        "leftarm": {
+          "rotation": [ -45.0, 30.0, -15.0 ]
         },
-        "leftitem" : {
-          "position" : [ 2.5, -1.0, 1.0 ],
-          "rotation" : [ 155.0, 30.0, 40.0 ]
+        "leftarm_custom": {
+          "rotation": [ -45.0, 30.0, -15.0 ]
+        },
+        "leftitem": {
+          "position": [ 2.5, -1.0, 1.0 ],
+          "rotation": [ 155.0, 30.0, 40.0 ]
         }
       }
     }

@@ -13,6 +13,6 @@
     }
   }
 }
-// this particle is emitted from a dedicated animation as opposed
-// to an animation controller because emitting particles directly
-// from animation controllers has a slight delay
+
+// This particle is intentionally emitted from a dedicated animation as opposed to an animation controller.
+// It appears that emitting particles directly from animation controllers has a slight delay.

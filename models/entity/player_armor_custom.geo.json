@@ -16,20 +16,24 @@
         { "name": "waist", "pivot": [ 0.0, 12.0, 0.0 ], "parent": "root" },
         { "name": "body", "pivot": [ 0.0, 24.0, 0.0 ], "parent": "waist" },
         { "name": "body_attachable", "inflate": 1.01, "cubes": [ { "origin": [ -4.0, 12.0, -2.0 ], "size": [ 8, 12, 4 ], "uv": [ 16, 16 ] } ], "parent": "body" },
-        { "name": "head", "pivot": [ 0.0, 24.0, 0.0 ], "parent": "body_attachable" },
+        { "name": "head", "pivot": [ 0.0, 24.0, 0.0 ], "parent": "body" },
         { "name": "head_attachable", "inflate": 1.0, "cubes": [ { "origin": [ -4.0, 24.0, -4.0 ], "size": [ 8, 8, 8 ], "uv": [ 0, 0 ] } ], "parent": "head" },
-        { "name": "hat", "pivot": [ 0.0, 24.0, 0.0 ], "parent": "hat_attachable" },
-        { "name": "hat_attachable", "inflate": 1.5, "cubes": [ { "origin": [ -4.0, 24.0, -4.0 ], "size": [ 8, 8, 8 ], "uv": [ 32, 0 ] } ], "parent": "head_attachable" },   
-        { "name": "rightarm", "pivot": [ -5.0, 22.0, 0.0 ], "parent": "body_attachable" },
-        { "name": "rightarm_attachable", "inflate": 1.0, "cubes": [ { "origin": [ -8.0, 12.0, -2.0 ], "size": [ 4, 12, 4 ], "uv": [ 40, 16 ] } ], "parent": "rightarm" },
-        { "name": "rightitem", "pivot": [ -6.0, 15.0, 1.0 ], "parent": "rightarm_attachable" },
-        { "name": "leftarm", "pivot": [ 5.0, 22.0, 0.0 ], "parent": "body_attachable" },
-        { "name": "leftarm_attachable", "inflate": 1.0, "cubes": [ { "origin": [ 4.0, 12.0, -2.0 ], "size": [ 4, 12, 4 ], "uv": [ 40, 16 ] } ], "mirror": true, "parent": "leftarm" },
-        { "name": "leftitem", "pivot": [ 6.0, 15.0, 1.0 ], "parent": "leftarm_attachable" },
-        { "name": "rightleg", "pivot": [ -1.9, 12.0, 0.0 ], "parent": "root" },
-        { "name": "rightleg_attachable", "inflate": 1.0, "cubes": [ { "origin": [ -3.9, 0.0, -2.0 ], "size": [ 4, 12, 4 ], "uv": [ 0, 16 ] } ], "parent": "rightleg" },
+        { "name": "hat", "pivot": [ 0.0, 24.0, 0.0 ], "parent": "head" },
+        { "name": "hat_attachable", "inflate": 1.5, "cubes": [ { "origin": [ -4.0, 24.0, -4.0 ], "size": [ 8, 8, 8 ], "uv": [ 32, 0 ] } ], "parent": "hat" },
+
+        // We can't directly inherit from the `leftarm`/`rightarm` bones (or even set the `binding` property to them, absent a pivot), because it causes the hardcoded `v.short_arm_offset_left`/`v.short_arm_offset_right` variables to always return 0.
+        // The workaround I came up with for this is really nasty: duplicate all `leftarm`/`rightarm` transformations in 3rd person to the `leftarm_custom`/`rightarm_custom` bones so it propagates to the armor model.
+        // Additionally, because emote transformations are hardcoded, we can't actually apply the hurt armor model while emoting because we can't duplicate bone transformations applied by emotes.
+        // A possible workaround which I haven't figured out how to properly implement is leveraging `q.bone_orientation_trs` to  dynamically copy over the transformation matrix over to the new bones in a single animation.
+        { "name": "leftarm_custom", "pivot": [ 5.0, 22.0, 0.0 ], "parent": "body" },
+        { "name": "leftarm_custom_attachable", "inflate": 1.0, "cubes": [ { "origin": [ 4.0, 12.0, -2.0 ], "size": [ 4, 12, 4 ], "uv": [ 40, 16 ] } ], "mirror": true, "parent": "leftarm_custom" },
+        { "name": "rightarm_custom", "pivot": [ -5.0, 22.0, 0.0 ], "parent": "body" },
+        { "name": "rightarm_custom_attachable", "inflate": 1.0, "cubes": [ { "origin": [ -8.0, 12.0, -2.0 ], "size": [ 4, 12, 4 ], "uv": [ 40, 16 ] } ], "parent": "rightarm_custom" },
+
         { "name": "leftleg", "pivot": [ 1.9, 12.0, 0.0 ], "parent": "root" },
-        { "name": "leftleg_attachable", "inflate": 1.0, "cubes": [ { "origin": [ -0.1, 0.0, -2.0 ], "size": [ 4, 12, 4 ], "uv": [ 0, 16 ] } ], "mirror": true, "parent": "leftleg" }
+        { "name": "leftleg_attachable", "inflate": 1.0, "cubes": [ { "origin": [ -0.1, 0.0, -2.0 ], "size": [ 4, 12, 4 ], "uv": [ 0, 16 ] } ], "mirror": true, "parent": "leftleg" },
+        { "name": "rightleg", "pivot": [ -1.9, 12.0, 0.0 ], "parent": "root" },
+        { "name": "rightleg_attachable", "inflate": 1.0, "cubes": [ { "origin": [ -3.9, 0.0, -2.0 ], "size": [ 4, 12, 4 ], "uv": [ 0, 16 ] } ], "parent": "rightleg" }
       ]
     },
     {
@@ -46,20 +50,20 @@
         { "name": "waist", "pivot": [ 0.0, 12.0, 0.0 ], "parent": "root" },
         { "name": "body", "pivot": [ 0.0, 24.0, 0.0 ], "parent": "waist" },
         { "name": "body_attachable_hurt", "inflate": 1.01, "cubes": [ { "origin": [ -4.0, 12.0, -2.0 ], "size": [ 8, 12, 4 ], "uv": [ 16, 16 ] } ], "parent": "body" },
-        { "name": "head", "pivot": [ 0.0, 24.0, 0.0 ], "parent": "body_attachable_hurt" },
+        { "name": "head", "pivot": [ 0.0, 24.0, 0.0 ], "parent": "body" },
         { "name": "head_attachable_hurt", "inflate": 1.0, "cubes": [ { "origin": [ -4.0, 24.0, -4.0 ], "size": [ 8, 8, 8 ], "uv": [ 0, 0 ] } ], "parent": "head" },
-        { "name": "hat", "pivot": [ 0.0, 24.0, 0.0 ], "parent": "hat_attachable_hurt" },
-        { "name": "hat_attachable_hurt", "inflate": 1.5, "cubes": [ { "origin": [ -4.0, 24.0, -4.0 ], "size": [ 8, 8, 8 ], "uv": [ 32, 0 ] } ], "parent": "head_attachable_hurt" },   
-        { "name": "rightarm", "pivot": [ -5.0, 22.0, 0.0 ], "parent": "body_attachable_hurt" },
-        { "name": "rightarm_attachable_hurt", "inflate": 1.0, "cubes": [ { "origin": [ -8.0, 12.0, -2.0 ], "size": [ 4, 12, 4 ], "uv": [ 40, 16 ] } ], "parent": "rightarm" },
-        { "name": "rightitem", "pivot": [ -6.0, 15.0, 1.0 ], "parent": "rightarm_attachable_hurt" },
-        { "name": "leftarm", "pivot": [ 5.0, 22.0, 0.0 ], "parent": "body_attachable_hurt" },
-        { "name": "leftarm_attachable_hurt", "inflate": 1.0, "cubes": [ { "origin": [ 4.0, 12.0, -2.0 ], "size": [ 4, 12, 4 ], "uv": [ 40, 16 ] } ], "mirror": true, "parent": "leftarm" },
-        { "name": "leftitem", "pivot": [ 6.0, 15.0, 1.0 ], "parent": "leftarm_attachable_hurt" },
-        { "name": "rightleg", "pivot": [ -1.9, 12.0, 0.0 ], "parent": "root" },
-        { "name": "rightleg_attachable_hurt", "inflate": 1.0, "cubes": [ { "origin": [ -3.9, 0.0, -2.0 ], "size": [ 4, 12, 4 ], "uv": [ 0, 16 ] } ], "parent": "rightleg" },
+        { "name": "hat", "pivot": [ 0.0, 24.0, 0.0 ], "parent": "head" },
+        { "name": "hat_attachable_hurt", "inflate": 1.5, "cubes": [ { "origin": [ -4.0, 24.0, -4.0 ], "size": [ 8, 8, 8 ], "uv": [ 32, 0 ] } ], "parent": "hat" },
+
+        { "name": "leftarm_custom", "pivot": [ 5.0, 22.0, 0.0 ], "parent": "body" },
+        { "name": "leftarm_custom_attachable_hurt", "inflate": 1.0, "cubes": [ { "origin": [ 4.0, 12.0, -2.0 ], "size": [ 4, 12, 4 ], "uv": [ 40, 16 ] } ], "mirror": true, "parent": "leftarm_custom" },
+        { "name": "rightarm_custom",  "pivot": [ -5.0, 22.0, 0.0 ], "parent": "body" },
+        { "name": "rightarm_custom_attachable_hurt", "inflate": 1.0, "cubes": [ { "origin": [ -8.0, 12.0, -2.0 ], "size": [ 4, 12, 4 ], "uv": [ 40, 16 ] } ], "parent": "rightarm_custom" },
+
         { "name": "leftleg", "pivot": [ 1.9, 12.0, 0.0 ], "parent": "root" },
-        { "name": "leftleg_attachable_hurt", "inflate": 1.0, "cubes": [ { "origin": [ -0.1, 0.0, -2.0 ], "size": [ 4, 12, 4 ], "uv": [ 0, 16 ] } ], "mirror": true, "parent": "leftleg" }
+        { "name": "leftleg_attachable_hurt", "inflate": 1.0, "cubes": [ { "origin": [ -0.1, 0.0, -2.0 ], "size": [ 4, 12, 4 ], "uv": [ 0, 16 ] } ], "mirror": true, "parent": "leftleg" },
+        { "name": "rightleg", "pivot": [ -1.9, 12.0, 0.0 ], "parent": "root" },
+        { "name": "rightleg_attachable_hurt", "inflate": 1.0, "cubes": [ { "origin": [ -3.9, 0.0, -2.0 ], "size": [ 4, 12, 4 ], "uv": [ 0, 16 ] } ], "parent": "rightleg" }
       ]
     },
     {
@@ -76,10 +80,11 @@
         { "name": "waist", "pivot": [ 0.0, 12.0, 0.0 ], "parent": "root" },
         { "name": "body", "pivot": [ 0.0, 24.0, 0.0 ], "parent": "waist" },
         { "name": "body_attachable", "inflate": 0.5, "cubes": [ { "origin": [ -4.0, 12.0, -2.0 ], "size": [ 8, 12, 4 ], "uv": [ 16, 16 ] } ], "parent": "body" },
-        { "name": "rightleg", "pivot": [ -1.9, 12.0, 0.0 ], "parent": "root" },
-        { "name": "rightleg_attachable", "inflate": 0.49, "cubes": [ { "origin": [ -3.9, 0.0, -2.0 ], "size": [ 4, 12, 4 ], "uv": [ 0, 16 ] } ], "parent": "rightleg" },
+
         { "name": "leftleg", "pivot": [ 1.9, 12.0, 0.0 ], "parent": "root" },
-        { "name": "leftleg_attachable", "inflate": 0.49, "cubes": [ { "origin": [ -0.1, 0.0, -2.0 ], "size": [ 4, 12, 4 ], "uv": [ 0, 16 ] } ], "mirror": true, "parent": "leftleg" }
+        { "name": "leftleg_attachable", "inflate": 0.49, "cubes": [ { "origin": [ -0.1, 0.0, -2.0 ], "size": [ 4, 12, 4 ], "uv": [ 0, 16 ] } ], "mirror": true, "parent": "leftleg" },
+        { "name": "rightleg", "pivot": [ -1.9, 12.0, 0.0 ], "parent": "root" },
+        { "name": "rightleg_attachable", "inflate": 0.49, "cubes": [ { "origin": [ -3.9, 0.0, -2.0 ], "size": [ 4, 12, 4 ], "uv": [ 0, 16 ] } ], "parent": "rightleg" }
       ]
     },
     {
@@ -96,10 +101,11 @@
         { "name": "waist", "pivot": [ 0.0, 12.0, 0.0 ], "parent": "root" },
         { "name": "body", "pivot": [ 0.0, 24.0, 0.0 ], "parent": "waist" },
         { "name": "body_attachable_hurt", "inflate": 0.5, "cubes": [ { "origin": [ -4.0, 12.0, -2.0 ], "size": [ 8, 12, 4 ], "uv": [ 16, 16 ] } ], "parent": "body" },
-        { "name": "rightleg", "pivot": [ -1.9, 12.0, 0.0 ], "parent": "root" },
-        { "name": "rightleg_attachable_hurt", "inflate": 0.49, "cubes": [ { "origin": [ -3.9, 0.0, -2.0 ], "size": [ 4, 12, 4 ], "uv": [ 0, 16 ] } ], "parent": "rightleg" },
+
         { "name": "leftleg", "pivot": [ 1.9, 12.0, 0.0 ], "parent": "root" },
-        { "name": "leftleg_attachable_hurt", "inflate": 0.49, "cubes": [ { "origin": [ -0.1, 0.0, -2.0 ], "size": [ 4, 12, 4 ], "uv": [ 0, 16 ] } ], "mirror": true, "parent": "leftleg" }
+        { "name": "leftleg_attachable_hurt", "inflate": 0.49, "cubes": [ { "origin": [ -0.1, 0.0, -2.0 ], "size": [ 4, 12, 4 ], "uv": [ 0, 16 ] } ], "mirror": true, "parent": "leftleg" },
+        { "name": "rightleg", "pivot": [ -1.9, 12.0, 0.0 ], "parent": "root" },
+        { "name": "rightleg_attachable_hurt", "inflate": 0.49, "cubes": [ { "origin": [ -3.9, 0.0, -2.0 ], "size": [ 4, 12, 4 ], "uv": [ 0, 16 ] } ], "parent": "rightleg" }
       ]
     }
   ]

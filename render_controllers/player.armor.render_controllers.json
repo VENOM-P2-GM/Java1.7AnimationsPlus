@@ -67,8 +67,8 @@
       "part_visibility": [
         { "*": false },
         { "body_attachable_hurt": "q.has_armor_slot(1)" },
-        { "leftarm_attachable_hurt": "q.has_armor_slot(1) && (q.armor_texture_slot(1) != 5)" },
-        { "rightarm_attachable_hurt": "q.has_armor_slot(1) && (q.armor_texture_slot(1) != 5)" },
+        { "leftarm_custom_attachable_hurt": "q.has_armor_slot(1) && (q.armor_texture_slot(1) != 5)" },
+        { "rightarm_custom_attachable_hurt": "q.has_armor_slot(1) && (q.armor_texture_slot(1) != 5)" },
         { "left_wing_hurt": "q.armor_texture_slot(1) == 5" },
         { "right_wing_hurt": "q.armor_texture_slot(1) == 5" }
       ],

@@ -8,7 +8,13 @@
         "leftarm": {
           "rotation": [ 0, 0, -6 ]
         },
+        "leftarm_custom": {
+          "rotation": [ 0, 0, -6 ]
+        },
         "rightarm": {
+          "rotation": [ 0, 0, 6 ]
+        },
+        "rightarm_custom": {
           "rotation": [ 0, 0, 6 ]
         }
       }

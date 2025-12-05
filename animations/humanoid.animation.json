@@ -19,6 +19,13 @@
             "t.norm = math.clamp((q.main_hand_item_max_duration - (q.main_hand_item_use_duration - q.frame_alpha + 1)) * 0.15, 0, 1); t.progress = t.norm; return t.progress * -25.7831007809;",
             0
           ]
+        },
+        "rightarm_custom" : {
+          "rotation" : [
+            "t.norm = math.clamp((q.main_hand_item_max_duration - (q.main_hand_item_use_duration - q.frame_alpha + 1)) * 0.15, 0, 1); t.progress = math.pow(t.norm, 0.5); t.ticks_alive = q.life_time * 20; return (t.progress * -80.2140913183) + ((t.progress >= 1.0) ? (math.cos(t.ticks_alive * 97.4028251722) * 4.58366236105) * (1 - v.attack_time) : 0) + (t.progress * 18.0);",
+            "t.norm = math.clamp((q.main_hand_item_max_duration - (q.main_hand_item_use_duration - q.frame_alpha + 1)) * 0.15, 0, 1); t.progress = t.norm; return t.progress * -25.7831007809;",
+            0
+          ]
         }
       }
     }

@@ -3,27 +3,24 @@
   "format_version": "1.10.0",
   "render_controllers": {
     "controller.render.armor.helmet": {
-      "geometry": "geometry.default_custom",
+      "geometry": "geometry.default",
       "materials": [ { "*": "v.is_enchanted ? material.enchanted : material.default" } ],
       "textures": [ "v.has_trim ? v.trim_path : texture.default", "texture.enchanted" ],
       "part_visibility": [
         { "*": false },
-        { "head_attachable": true },
-        { "hat_attachable": true }
+        { "head": true },
+        { "hat": true }
       ]
     },
     "controller.render.armor.chestplate": {
-      "geometry": "q.is_emoting ? geometry.default : geometry.default_custom",
+      "geometry": "geometry.default",
       "materials": [ { "*": "v.is_enchanted ? material.enchanted : material.default" } ],
       "textures": [ "v.has_trim ? v.trim_path : texture.default", "texture.enchanted" ],
       "part_visibility": [
         { "*": false },
-        { "body": "q.is_emoting" },
-        { "leftarm": "q.is_emoting" },
-        { "rightarm": "q.is_emoting" },
-        { "body_attachable": "!q.is_emoting" },
-        { "leftarm_custom_attachable": "!q.is_emoting" },
-        { "rightarm_custom_attachable": "!q.is_emoting" }
+        { "body": true },
+        { "leftarm": true },
+        { "rightarm": true }
       ]
     },
     "controller.render.armor.elytra": {
@@ -37,24 +34,24 @@
       ]
     },
     "controller.render.armor.leggings": {
-      "geometry": "geometry.default_custom",
+      "geometry": "geometry.default",
       "materials": [ { "*": "v.is_enchanted ? material.enchanted : material.default" } ],
       "textures": [ "v.has_trim ? v.trim_path : texture.default", "texture.enchanted" ],
       "part_visibility": [
         { "*": false },
-        { "body_attachable": true },
-        { "leftleg_attachable": true },
-        { "rightleg_attachable": true }
+        { "body": true },
+        { "leftleg": true },
+        { "rightleg": true }
       ]
     },
     "controller.render.armor.boots": {
-      "geometry": "geometry.default_custom",
+      "geometry": "geometry.default",
       "materials": [ { "*": "v.is_enchanted ? material.enchanted : material.default" } ],
       "textures": [ "v.has_trim ? v.trim_path : texture.default", "texture.enchanted" ],
       "part_visibility": [
         { "*": false },
-        { "leftleg_attachable": true },
-        { "rightleg_attachable": true }
+        { "leftleg": true },
+        { "rightleg": true }
       ]
     }
   }

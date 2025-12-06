@@ -79,6 +79,7 @@
           "v.tcos0 = 0.0;",
           "v.hurt_time = 0.0;",
           "v.previous_hurt_time = 0.0;",
+          "v.hurt_particle_time = 0.0;",
           "v.relative_head_yaw = 0.0;",
           "v.new_relative_head_yaw = 0.0;",
           "v.new_head_yaw = 0.0;",

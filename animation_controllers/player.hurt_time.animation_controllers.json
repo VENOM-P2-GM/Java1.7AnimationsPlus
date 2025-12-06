@@ -30,7 +30,7 @@
       }
     },
 
-    // BUG: `is_hurt_color` doesn't evaluate when player is invisible, so damage particles won't show in this circumstance.
+    // BUG: `is_hurt_color` in the render controller doesn't evaluate when a player is invisible, so damage particles won't show in this circumstance.
     "controller.animation.player.hurt_particle": {
       "initial_state": "default",
       "states": {
@@ -40,6 +40,9 @@
           ]
         },
         "emit": {
+          "on_entry":[
+            "v.hurt_particle_time = q.life_time;"
+          ],
           /*"particle_effects": [
             { "effect": "hurt" }
           ],*/
@@ -47,7 +50,7 @@
             "emit_hurt_particle"
           ],
           "transitions": [
-            { "default": "v.hurt_time <= 0.0" }
+            { "default": "t.hurt_anim_sec = 0.5; return q.all_animations_finished && q.is_alive && ((q.life_time - v.hurt_particle_time) >= t.hurt_anim_sec);" }
           ]
         }
       }

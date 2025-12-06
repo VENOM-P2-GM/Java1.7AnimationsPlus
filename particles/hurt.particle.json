@@ -28,9 +28,12 @@
       "minecraft:emitter_shape_point": {
         "offset": [
           0,
-          // wouldn't it be nice to access the entity aabb dimensions here?
-          // center vertically along hitbox
-          "t.player_eye_height = 1.620001; return (q.is_gliding || q.is_swimming || q.is_crawling || q.can_damage_nearby_mobs) ? ((0.6 / 2) - t.player_eye_height) : ((1.8 / 2) - t.player_eye_height);",
+          // Center vertically along hitbox.
+          // All particle offsets are in units of 1/16'th of a block. An offset of 16 equates to 1 block in a given direction.
+          // `t.player_eye_height = 1.62` -> the player eye height is exactly 1.62 blocks. When attached to an entity via a locator, the eye height is the origin.
+          // `t.default_center_offset = 1.8 / 2` -> vertical center of a 0.6 x 1.8 block AABB when in the default state.
+          // `t.root_rotated_z_center_offset = 0.6 / 2` -> vertical center of a 0.6 x 0.6 block AABB when in the root rotated state.
+          "t.root_rotated_z = (q.is_sleeping || q.is_gliding || q.is_swimming || q.is_crawling || q.can_damage_nearby_mobs); t.player_eye_height = 1.62; t.default_center_offset = 0.9; t.root_rotated_z_center_offset = 0.3; return (t.root_rotated_z ? t.root_rotated_z_center_offset : t.default_center_offset) - t.player_eye_height;",
           0
         ],
         "direction": [

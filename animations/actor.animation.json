@@ -8,7 +8,7 @@
         "body": {
           "rotation": [ "q.camera_rotation(0)", "q.camera_rotation(1)", 0.0 ],
 
-          // As of 1.21.100, projectiles are scaled to be more in parity with java.
+          // As of 1.21.100, projectiles are scaled to be in parity with MCJE.
           // Change `t.scale_multiplier` to your liking if you are using < 1.21.100.
           "scale": 0.85
         }

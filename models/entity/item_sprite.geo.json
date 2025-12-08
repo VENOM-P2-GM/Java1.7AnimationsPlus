@@ -16,8 +16,11 @@
             {
               "origin": [ -4.0, -2.0, 0.0 ],
               "size": [ 8.0, 8.0, 0.0 ],
-              "uv": [ 0, 0 ],
-              "rotation": [ 0.0, 180.0, 0.0 ]
+              "uv": [ 0, 0 ]
+              
+              // As of 1.21.100, projectile models are rotated to be in parity with MCJE.
+              // Uncomment this line if you are using < 1.21.100.
+              //"rotation": [ 0.0, 180.0, 0.0 ]
             }
           ]
         }

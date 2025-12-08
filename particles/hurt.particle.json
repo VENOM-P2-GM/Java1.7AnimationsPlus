@@ -29,7 +29,7 @@
         "offset": [
           0,
           // Center vertically along hitbox.
-          // All particle offsets are in units of 1/16'th of a block. An offset of 16 equates to 1 block in a given direction.
+          // All particle offsets are in block units. An offset of 1 equates to 1 block in a given direction.
           // `t.player_eye_height = 1.62` -> the player eye height is exactly 1.62 blocks. When attached to an entity via a locator, the eye height is the origin.
           // `t.default_center_offset = 1.8 / 2` -> vertical center of a 0.6 x 1.8 block AABB when in the default state.
           // `t.root_rotated_z_center_offset = 0.6 / 2` -> vertical center of a 0.6 x 0.6 block AABB when in the root rotated state.

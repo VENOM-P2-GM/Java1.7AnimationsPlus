@@ -14,14 +14,13 @@
         "default": "geometry.fishing_hook"
       },
       "animations": {
-        "flying": "animation.actor.billboard",
+        "flying": "animation.fishing_hook.billboard",
         "particle": "controller.animation.projectile_particle"
       },
       "particle_effects":{
         "basic_crit": "minecraft:basic_crit_particle"
       },
       "scripts": {
-        "scale": "1.25",
         "initialize":[
           "v.life_time = 0.0;"
         ],

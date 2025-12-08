@@ -13,6 +13,14 @@
           "scale": 0.85
         }
       }
+    },
+    "animation.fishing_hook.billboard": {
+      "loop": true,
+      "bones": {
+        "body": {
+          "rotation": [ "q.camera_rotation(0)", "q.camera_rotation(1)", 0.0 ]
+        }
+      }
     }
   }
 }

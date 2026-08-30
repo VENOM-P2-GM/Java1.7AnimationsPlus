@@ -4,6 +4,12 @@
 // (`cape_seg_1/2/3`) split the lower 12 pixels of the cape into a chain, which `animation.player.cape_physics`
 // drives with simulated cloth physics. Each slice keeps the exact vanilla UV layout so the cape texture is
 // unaffected. These geometries replace the `cape` / `cape_root_parent` slots in player.entity.json only.
+//
+// NOTE: this file is a byte-for-byte mirror of `models/entity/cape.geo.json` (the only differences are the
+// geometry identifiers). Keep both files in sync: `geometry.cape` / `geometry.cape_root_parent` are what the
+// cape render controller resolves when the engine reads the geometry expression directly, while
+// `geometry.cape_physics` / `geometry.cape_physics_root_parent` are what player.entity.json binds the
+// `cape` / `cape_root_parent` slots to. Both paths must end up on the segmented model.
 {
   "format_version": "1.16.0",
   "minecraft:geometry": [

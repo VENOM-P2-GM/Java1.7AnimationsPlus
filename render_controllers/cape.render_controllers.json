@@ -1,13 +1,30 @@
 // This file was modified by ambient (ambiennt on discord). Do not use or redistribute this file or its contents without explicit permission from the author.
+//
+// The player cape is drawn by a dedicated cape render pass that the engine looks up by name
+// (`controller.render.player.cape`); it is intentionally *not* listed in player.entity.json's
+// render_controllers array, because the engine adds that pass on its own.
+//
+// `rebuild_animation_matrices` is required (it is part of the vanilla cape render controller): the cape is
+// drawn with a different geometry than the player model, so without it the cape pass re-uses the player
+// model's cached bone matrices - where the `cape` bone does not exist - and the cape renders frozen in its
+// bind pose instead of following `animation.player.cape` / `animation.player.cape_physics`.
+//
+// The cape geometry is segmented (see models/entity/cape.geo.json): `geometry.cape_physics` is the copy
+// bound to the `cape` slot in player.entity.json, while `geometry.cape` is the vanilla identifier that the
+// engine falls back to. Both are identical, so the cape physics segments always resolve.
 {
   "format_version": "1.10.0",
   "render_controllers": {
     "controller.render.player.cape": {
-      "geometry": "(q.is_emoting || v.is_in_menu) ? geometry.cape : geometry.cape_root_parent",
+      "rebuild_animation_matrices": true,
+      "geometry": "(q.is_emoting || v.is_in_menu) ? geometry.cape_physics_root_parent : geometry.cape_physics",
       "materials": [ { "*": "material.cape" } ],
       "textures": [ "texture.cape" ],
       "part_visibility": [
-        { "cape": "(q.armor_texture_slot(1) != 5) && (!v.is_first_person || v.is_paperdoll) && !v.map_face_icon && !q.is_spectator" }
+        { "cape": "(q.armor_texture_slot(1) != 5) && (!v.is_first_person || v.is_paperdoll) && !v.map_face_icon && !q.is_spectator" },
+        { "cape_seg_1": "(q.armor_texture_slot(1) != 5) && (!v.is_first_person || v.is_paperdoll) && !v.map_face_icon && !q.is_spectator" },
+        { "cape_seg_2": "(q.armor_texture_slot(1) != 5) && (!v.is_first_person || v.is_paperdoll) && !v.map_face_icon && !q.is_spectator" },
+        { "cape_seg_3": "(q.armor_texture_slot(1) != 5) && (!v.is_first_person || v.is_paperdoll) && !v.map_face_icon && !q.is_spectator" }
       ],
       "is_hurt_color": {
         "r": 0.0,

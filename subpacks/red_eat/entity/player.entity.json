@@ -88,6 +88,15 @@
           "v.modified_distance_moved = 0.0;",
           "v.modified_move_speed = 0.0;",
           "v.relative_cape_rotation = 0.0;",
+          "v.cape_h_speed = 0.0;",
+          "v.cape_v_speed = 0.0;",
+          "v.cape_flutter = 0.0;",
+          "v.cape_rx_1 = 0.0;",
+          "v.cape_rx_2 = 0.0;",
+          "v.cape_rx_3 = 0.0;",
+          "v.cape_ry_1 = 0.0;",
+          "v.cape_ry_2 = 0.0;",
+          "v.cape_ry_3 = 0.0;",
           "v.is_in_menu = 0.0;",
           "v.full_swim_distance_start = 0.0;",
           "v.full_swim_distance = 0.0;",
@@ -113,6 +122,13 @@
           "v.is_valid_player ? { v.modified_distance_moved = v.modified_distance_moved + (v.modified_move_speed * q.delta_time * 20); };",
           
           "v.is_valid_player ? { t.rot_y_delta = q.body_y_rotation - q.head_y_rotation(0); v.relative_cape_rotation = q.is_sleeping ? 0 : (v.modified_move_speed * (math.sqrt(v.modified_move_speed) - math.sqrt(q.cape_flap_amount)) * math.sin(t.rot_y_delta)); };",
+          // Cape physics simulation. Smoothed per-frame values are consumed by
+          // `animation.player.cape_physics`; the shared speeds are integrated here so that they are
+          // only advanced once per frame (an animation channel would run once per bone instead).
+          "v.is_valid_player ? { t.cape_h_speed_raw = math.sqrt(q.position_delta(0) * q.position_delta(0) + q.position_delta(2) * q.position_delta(2)) * 20.0; v.cape_h_speed = v.cape_h_speed + (t.cape_h_speed_raw - v.cape_h_speed) * (1.0 - math.pow((1.0 - 0.35), q.delta_time / 0.1)); t.cape_v_speed_raw = (q.position_delta(1) + 0.0784) * 20.0; v.cape_v_speed = v.cape_v_speed + (t.cape_v_speed_raw - v.cape_v_speed) * (1.0 - math.pow((1.0 - 0.35), q.delta_time / 0.1)); };",
+          "v.is_valid_player ? { t.cape_trail = math.clamp(v.cape_h_speed * 1.6, 0.0, 18.0) - math.clamp(v.cape_v_speed, -12.0, 12.0) * 0.9 + (q.is_swimming ? 5.0 : 0.0); t.cape_step_1 = 1.0 - math.pow((1.0 - 0.45), q.delta_time / 0.1); t.cape_step_2 = 1.0 - math.pow((1.0 - 0.38), q.delta_time / 0.1); t.cape_step_3 = 1.0 - math.pow((1.0 - 0.3), q.delta_time / 0.1); v.cape_rx_1 = v.cape_rx_1 + (t.cape_trail * 0.6 - v.cape_rx_1) * t.cape_step_1; v.cape_rx_2 = v.cape_rx_2 + (t.cape_trail * 0.85 - v.cape_rx_2) * t.cape_step_2; v.cape_rx_3 = v.cape_rx_3 + (t.cape_trail * 1.1 - v.cape_rx_3) * t.cape_step_3; } : { v.cape_rx_1 = 0.0; v.cape_rx_2 = 0.0; v.cape_rx_3 = 0.0; };",
+          "v.is_valid_player ? { t.cape_step_y_1 = 1.0 - math.pow((1.0 - 0.4), q.delta_time / 0.1); t.cape_step_y_2 = 1.0 - math.pow((1.0 - 0.33), q.delta_time / 0.1); t.cape_step_y_3 = 1.0 - math.pow((1.0 - 0.26), q.delta_time / 0.1); v.cape_ry_1 = v.cape_ry_1 + (v.relative_cape_rotation * 10.0 - v.cape_ry_1) * t.cape_step_y_1; v.cape_ry_2 = v.cape_ry_2 + (v.relative_cape_rotation * 10.0 - v.cape_ry_2) * t.cape_step_y_2; v.cape_ry_3 = v.cape_ry_3 + (v.relative_cape_rotation * 10.0 - v.cape_ry_3) * t.cape_step_y_3; } : { v.cape_ry_1 = 0.0; v.cape_ry_2 = 0.0; v.cape_ry_3 = 0.0; };",
+          "v.cape_flutter = v.is_valid_player ? math.min(v.cape_h_speed, 4.0) * 0.25 : 0.0;",
           
           "v.is_valid_player ? { v.elytra_tilt_ratio = (q.position_delta(1) < 0) ? 1 - math.pow(-q.movement_direction(1), 1.5) : 1; };",
           "v.is_valid_player ? { t.lerp_pct = 0.8; t.lerp_time = 0.2; t.elytra_glide_amount_raw = q.is_gliding ? 1.0 : 0.0; v.elytra_glide_amount = v.elytra_glide_amount + (t.elytra_glide_amount_raw - v.elytra_glide_amount) * (1 - math.pow((1 - temp.lerp_pct), q.delta_time / t.lerp_time)); };",

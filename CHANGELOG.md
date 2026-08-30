@@ -1,9 +1,27 @@
 ### Unreleased
 
-- Added cape physics (segmented cape with simulated cloth response)
-    - New `geometry.cape_physics` / `geometry.cape_physics_root_parent` segmented cape models
-    - New `animation.player.cape_physics` drives the three lower cape segments with velocity-based
-      trailing, smoothed sway, flutter, and swim/elytra streaming
+- Fixed the cape not animating at all in game
+    - `controller.render.player.cape` was missing `rebuild_animation_matrices` (it is part of the vanilla
+      cape render controller). The cape is drawn with its own geometry, so without it the cape pass re-uses
+      the player model's cached bone matrices - where the `cape` bone does not exist - and the cape renders
+      frozen in its bind pose instead of following `animation.player.cape`
+- Cape physics (segmented cape with simulated cloth response)
+    - `geometry.cape` / `geometry.cape_root_parent` are now a chain of four bones
+      (`cape` -> `cape_seg_1` -> `cape_seg_2` -> `cape_seg_3`) instead of a single rigid plate
+    - `geometry.cape_physics` / `geometry.cape_physics_root_parent` (bound to the `cape` /
+      `cape_root_parent` slots in player.entity.json) are kept as identical copies, so the segmented
+      cape resolves no matter whether the cape pass reads the render controller's geometry expression
+      or the client entity slot
+    - New `animation.player.cape_physics` drives the three lower segments with velocity based trailing,
+      smoothed sway, a speed scaled travelling flutter and a vertical-speed billow
+    - The simulation runs in `player.entity.json`'s `pre_animation` (same pattern as
+      `v.relative_cape_rotation`) so every value is integrated exactly once per frame, and all cape
+      variables are initialised
+    - Segment X rotations are positive: the `cape` bone is rotated 180 degrees around Y, which mirrors the
+      X/Z axes of its children, so the segments have to use the opposite sign of the Java 1.7
+      `animation.player.cape` to keep trailing in the same direction
+    - `part_visibility` rules were added for `cape_seg_1/2/3` so the segments hide with the cape
+      (elytra, spectator mode, map face icon, first person)
     - The Java 1.7 `animation.player.cape` keeps full control of the `cape` bone unchanged;
       at rest the cape hangs exactly like vanilla
 

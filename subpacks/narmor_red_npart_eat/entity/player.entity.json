@@ -37,8 +37,8 @@
       },
       "geometry": {
         "default": "geometry.humanoid.custom",
-        "cape": "geometry.cape",
-        "cape_root_parent": "geometry.cape_root_parent",
+        "cape": "geometry.cape_physics",
+        "cape_root_parent": "geometry.cape_physics_root_parent",
 
         //"player_armor_custom": "geometry.player_armor_custom",
         //"player_armor_custom_hurt": "geometry.player_armor_custom_hurt",
@@ -137,7 +137,8 @@
           //{ "offset_custom_arm_height": "q.has_armor_slot(1) && (q.armor_texture_slot(1) != 5)" },
           //{ "elytra_controller": "(v.hurt_time > 0.0) && (q.armor_texture_slot(1) == 5)" },
           //{ "disable_attachables": "(v.hurt_time > 0.0) && !q.is_spectator && !q.is_invisible && !q.is_emoting" },
-          { "interpolated_yaw": "q.is_local_player && v.is_valid_player && !v.head_rot_detached_from_camera" }
+          { "interpolated_yaw": "q.is_local_player && v.is_valid_player && !v.head_rot_detached_from_camera" },
+          { "cape_physics": "v.is_valid_player" }
         ]
       },
       /*"particle_effects":{
@@ -182,6 +183,7 @@
         "look_at_target_swimming": "animation.humanoid.look_at_target.swimming",
         "look_at_target_inverted": "animation.player.look_at_target.inverted",
         "cape": "animation.player.cape",
+        "cape_physics": "animation.player.cape_physics",
         "move.arms": "animation.player.move.arms",
         "move.legs": "animation.player.move.legs",
         "swimming": "animation.player.swim",

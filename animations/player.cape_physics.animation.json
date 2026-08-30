@@ -1,0 +1,38 @@
+// Cape physics (additive only - does not touch the Java 1.7 cape animation).
+// `animation.player.cape` (Java 1.7 port) keeps full control of the `cape` bone. This animation only
+// drives the child segments (cape_seg_1/2/3) with a simulated cloth response: each segment smooths
+// toward a target that trails horizontal/vertical velocity (with per-segment gain and response rate so
+// the lower the segment, the more it swings), plus a speed-scaled flutter and a yaw swing that follows
+// `v.relative_cape_rotation`. At rest every target is 0.0, so the cape hangs exactly like vanilla.
+// This animation is only blended in while `v.is_valid_player` is true (never in menus/paperdolls).
+{
+  "format_version": "1.10.0",
+  "animations": {
+    "animation.player.cape_physics": {
+      "loop": true,
+      "bones": {
+        "cape_seg_1": {
+          "rotation": [
+            "t.cape_h_speed_raw = math.sqrt(q.position_delta(0) * q.position_delta(0) + q.position_delta(2) * q.position_delta(2)) * 20; v.cape_h_speed = v.cape_h_speed + (t.cape_h_speed_raw - v.cape_h_speed) * (1 - math.pow((1 - 0.5), q.delta_time / 0.1)); t.cape_v_speed_raw = q.position_delta(1) * 20; v.cape_v_speed = v.cape_v_speed + (t.cape_v_speed_raw - v.cape_v_speed) * (1 - math.pow((1 - 0.5), q.delta_time / 0.1)); t.cape_stream = (q.is_gliding ? -80.0 : (q.is_swimming ? -65.0 : 0.0)); t.cape_target = t.cape_stream - math.clamp(v.cape_h_speed * 2.1, 0.0, 70.0) + math.clamp(v.cape_v_speed, -15.0, 15.0) * 0.9; v.cape_rx_1 = v.cape_rx_1 + (t.cape_target * 0.35 - v.cape_rx_1) * (1 - math.pow((1 - 0.4), q.delta_time / 0.1)); return v.cape_rx_1 + math.sin(q.life_time * 11.0 + 0.7) * math.min(v.cape_h_speed, 3.0) * 0.6;",
+            "t.cape_target_y = v.relative_cape_rotation * 26.0; v.cape_ry_1 = v.cape_ry_1 + (t.cape_target_y * 0.35 - v.cape_ry_1) * (1 - math.pow((1 - 0.4), q.delta_time / 0.1)); return v.cape_ry_1 + math.sin(q.life_time * 9.0 + 0.7) * math.min(v.cape_h_speed, 3.0) * 0.6;",
+            "math.sin(q.life_time * 8.0 + 1.4) * math.min(v.cape_h_speed, 3.0) * 0.12"
+          ]
+        },
+        "cape_seg_2": {
+          "rotation": [
+            "t.cape_h_speed_raw = math.sqrt(q.position_delta(0) * q.position_delta(0) + q.position_delta(2) * q.position_delta(2)) * 20; v.cape_h_speed = v.cape_h_speed + (t.cape_h_speed_raw - v.cape_h_speed) * (1 - math.pow((1 - 0.5), q.delta_time / 0.1)); t.cape_v_speed_raw = q.position_delta(1) * 20; v.cape_v_speed = v.cape_v_speed + (t.cape_v_speed_raw - v.cape_v_speed) * (1 - math.pow((1 - 0.5), q.delta_time / 0.1)); t.cape_stream = (q.is_gliding ? -80.0 : (q.is_swimming ? -65.0 : 0.0)); t.cape_target = t.cape_stream - math.clamp(v.cape_h_speed * 2.1, 0.0, 70.0) + math.clamp(v.cape_v_speed, -15.0, 15.0) * 0.9; v.cape_rx_2 = v.cape_rx_2 + (t.cape_target * 0.7 - v.cape_rx_2) * (1 - math.pow((1 - 0.55), q.delta_time / 0.1)); return v.cape_rx_2 + math.sin(q.life_time * 11.0 + 1.4) * math.min(v.cape_h_speed, 3.0) * 1.2;",
+            "t.cape_target_y = v.relative_cape_rotation * 26.0; v.cape_ry_2 = v.cape_ry_2 + (t.cape_target_y * 0.7 - v.cape_ry_2) * (1 - math.pow((1 - 0.55), q.delta_time / 0.1)); return v.cape_ry_2 + math.sin(q.life_time * 9.0 + 1.4) * math.min(v.cape_h_speed, 3.0) * 1.2;",
+            "math.sin(q.life_time * 8.0 + 2.8) * math.min(v.cape_h_speed, 3.0) * 0.25"
+          ]
+        },
+        "cape_seg_3": {
+          "rotation": [
+            "t.cape_h_speed_raw = math.sqrt(q.position_delta(0) * q.position_delta(0) + q.position_delta(2) * q.position_delta(2)) * 20; v.cape_h_speed = v.cape_h_speed + (t.cape_h_speed_raw - v.cape_h_speed) * (1 - math.pow((1 - 0.5), q.delta_time / 0.1)); t.cape_v_speed_raw = q.position_delta(1) * 20; v.cape_v_speed = v.cape_v_speed + (t.cape_v_speed_raw - v.cape_v_speed) * (1 - math.pow((1 - 0.5), q.delta_time / 0.1)); t.cape_stream = (q.is_gliding ? -80.0 : (q.is_swimming ? -65.0 : 0.0)); t.cape_target = t.cape_stream - math.clamp(v.cape_h_speed * 2.1, 0.0, 70.0) + math.clamp(v.cape_v_speed, -15.0, 15.0) * 0.9; v.cape_rx_3 = v.cape_rx_3 + (t.cape_target * 1.0 - v.cape_rx_3) * (1 - math.pow((1 - 0.7), q.delta_time / 0.1)); return v.cape_rx_3 + math.sin(q.life_time * 11.0 + 2.1) * math.min(v.cape_h_speed, 3.0) * 1.7;",
+            "t.cape_target_y = v.relative_cape_rotation * 26.0; v.cape_ry_3 = v.cape_ry_3 + (t.cape_target_y * 1.0 - v.cape_ry_3) * (1 - math.pow((1 - 0.7), q.delta_time / 0.1)); return v.cape_ry_3 + math.sin(q.life_time * 9.0 + 2.1) * math.min(v.cape_h_speed, 3.0) * 1.7;",
+            "math.sin(q.life_time * 8.0 + 4.2) * math.min(v.cape_h_speed, 3.0) * 0.35"
+          ]
+        }
+      }
+    }
+  }
+}

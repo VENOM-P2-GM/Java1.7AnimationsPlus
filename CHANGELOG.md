@@ -1,3 +1,12 @@
+### Unreleased
+
+- Added cape physics (segmented cape with simulated cloth response)
+    - New `geometry.cape_physics` / `geometry.cape_physics_root_parent` segmented cape models
+    - New `animation.player.cape_physics` drives the three lower cape segments with velocity-based
+      trailing, smoothed sway, flutter, and swim/elytra streaming
+    - The Java 1.7 `animation.player.cape` keeps full control of the `cape` bone unchanged;
+      at rest the cape hangs exactly like vanilla
+
 ### v2.5.1
 
 - Added `No Armor Overlay + Console Edition Eat Animation` subpack

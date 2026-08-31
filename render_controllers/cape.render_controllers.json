@@ -4,20 +4,29 @@
 // (`controller.render.player.cape`); it is intentionally *not* listed in player.entity.json's
 // render_controllers array, because the engine adds that pass on its own.
 //
-// `rebuild_animation_matrices` is required (it is part of the vanilla cape render controller): the cape is
-// drawn with a different geometry than the player model, so without it the cape pass re-uses the player
-// model's cached bone matrices - where the `cape` bone does not exist - and the cape renders frozen in its
-// bind pose instead of following `animation.player.cape` / `animation.player.cape_physics`.
-//
-// The cape geometry is segmented (see models/entity/cape.geo.json): `geometry.cape_physics` is the copy
-// bound to the `cape` slot in player.entity.json, while `geometry.cape` is the vanilla identifier that the
-// engine falls back to. Both are identical, so the cape physics segments always resolve.
+// This file mirrors the game's built-in vanilla cape render controller (plus visibility rules
+// for the physics segments, see models/entity/cape.geo.json):
+// - `rebuild_animation_matrices` is part of the vanilla cape render controller and is required
+//   for the cape pass to apply `animation.player.cape` / `animation.player.cape_physics` at all.
+//   Without it the cape pass re-uses the player model's cached bone matrices (where the `cape`
+//   bone does not exist) and the cape renders frozen in its bind pose.
+// - The geometry is referenced exactly the way vanilla does: plain `Geometry.cape`, no ternary.
+//   An earlier version selected `geometry.cape_physics(_root_parent)` through an
+//   `(q.is_emoting || v.is_in_menu)` ternary here, and the cape pass stopped rendering entirely.
+//   The in-menu pose is already handled inside `animation.player.cape` (`v.is_in_menu ? -6.0`),
+//   so switching geometries for menus/emotes is not needed (vanilla never switches either).
+// - `geometry.cape` IS the segmented cape model (cape -> cape_seg_1/2/3), and player.entity.json
+//   binds the `cape` slot to it as well, so the segmented physics model is used no matter
+//   whether the pass resolves geometry through this expression or through the entity slot.
+// - The extra part_visibility entries make the three physics segments hide together with the
+//   top `cape` bone (elytra equipped, first person, map face icon, spectator). They use the
+//   exact same condition vanilla uses for `cape`, so they never change the top bone's behavior.
 {
   "format_version": "1.10.0",
   "render_controllers": {
     "controller.render.player.cape": {
       "rebuild_animation_matrices": true,
-      "geometry": "(q.is_emoting || v.is_in_menu) ? geometry.cape_physics_root_parent : geometry.cape_physics",
+      "geometry": "Geometry.cape",
       "materials": [ { "*": "material.cape" } ],
       "textures": [ "texture.cape" ],
       "part_visibility": [

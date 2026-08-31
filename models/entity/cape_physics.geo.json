@@ -1,15 +1,15 @@
-// Cape physics geometry.
+// Cape physics geometry (identical mirror of models/entity/cape.geo.json).
 // Segmented cape: the top bone (`cape`) is identical to the vanilla cape bone (same pivot, bind rotation and
 // cube bounds), so the Java 1.7 cape animation binds to it exactly as before. The three child bones
 // (`cape_seg_1/2/3`) split the lower 12 pixels of the cape into a chain, which `animation.player.cape_physics`
 // drives with simulated cloth physics. Each slice keeps the exact vanilla UV layout so the cape texture is
-// unaffected. These geometries replace the `cape` / `cape_root_parent` slots in player.entity.json only.
+// unaffected.
 //
 // NOTE: this file is a byte-for-byte mirror of `models/entity/cape.geo.json` (the only differences are the
-// geometry identifiers). Keep both files in sync: `geometry.cape` / `geometry.cape_root_parent` are what the
-// cape render controller resolves when the engine reads the geometry expression directly, while
-// `geometry.cape_physics` / `geometry.cape_physics_root_parent` are what player.entity.json binds the
-// `cape` / `cape_root_parent` slots to. Both paths must end up on the segmented model.
+// geometry identifiers). Keep both files in sync. These identifiers are kept as drop-in alternates of
+// `geometry.cape` / `geometry.cape_root_parent`; the cape render controller and player.entity.json reference
+// the vanilla-style identifiers directly, since binding the cape pass to non-vanilla geometry identifiers
+// made the dedicated cape pass render nothing at all.
 {
   "format_version": "1.16.0",
   "minecraft:geometry": [

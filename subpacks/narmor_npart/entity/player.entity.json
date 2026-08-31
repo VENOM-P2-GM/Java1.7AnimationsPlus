@@ -37,8 +37,8 @@
       },
       "geometry": {
         "default": "geometry.humanoid.custom",
-        "cape": "geometry.cape_physics",
-        "cape_root_parent": "geometry.cape_physics_root_parent",
+        "cape": "geometry.cape",
+        "cape_root_parent": "geometry.cape_root_parent",
 
         //"player_armor_custom": "geometry.player_armor_custom",
         //"player_armor_custom_hurt": "geometry.player_armor_custom_hurt",

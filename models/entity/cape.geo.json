@@ -6,10 +6,12 @@
 // split the remaining 12 pixels of the cape into 4 pixel slices, each pivoting at the top edge of its own
 // cube and keeping the vanilla UV layout (uv y = 0, 4, 8, 12), so the cape texture is untouched and the
 // segments line up perfectly at rest (they form the exact same 10x16x1 box as the vanilla cape).
+// player.entity.json binds the `cape` / `cape_root_parent` slots to these geometries, and
+// `controller.render.player.cape` references `Geometry.cape` directly (exactly like the vanilla cape
+// render controller), so the segmented cape is used no matter whether the engine resolves the cape pass
+// through the render controller's geometry expression or through the client entity `cape` slot.
 // `geometry.cape_physics` / `geometry.cape_physics_root_parent` (models/entity/cape_physics.geo.json) are
-// identical copies of these two geometries and are what player.entity.json binds the `cape` slots to;
-// the identical copies exist so the segmented cape is used no matter whether the engine resolves the
-// cape pass through the render controller's geometry expression or through the client entity `cape` slot.
+// kept as identical copies of these two geometries as drop-in alternates. Keep both files in sync.
 {
   "format_version": "1.16.0",
   "minecraft:geometry": [

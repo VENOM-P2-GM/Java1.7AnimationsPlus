@@ -1,5 +1,16 @@
 ### Unreleased
 
+- Fixed the cape not rendering at all (it disappeared entirely after the cape physics update)
+    - The cape render controller's geometry expression now references the segmented cape exactly the
+      way the game's own vanilla cape render controller does: plain `Geometry.cape`, with the
+      `cape` slot of `player.entity.json` bound to `geometry.cape` again. The previous update pointed
+      the dedicated engine cape render pass at non-vanilla geometry identifiers through an
+      `(q.is_emoting || v.is_in_menu)` ternary, after which the pass drew nothing
+    - Menu/emote handling is unchanged: `animation.player.cape` already applies the in-menu pose
+      (`v.is_in_menu`), like it always has
+    - `rebuild_animation_matrices` is kept (it is required for the cape animation to run), and the
+      segmented cape model + cape physics simulation are untouched, so the cape keeps its cloth
+      physics while rendering like vanilla
 - Fixed the cape not animating at all in game
     - `controller.render.player.cape` was missing `rebuild_animation_matrices` (it is part of the vanilla
       cape render controller). The cape is drawn with its own geometry, so without it the cape pass re-uses

@@ -1,9 +1,10 @@
 // Cape physics geometry (identical mirror of models/entity/cape.geo.json).
 // Segmented cape: the top bone (`cape`) is identical to the vanilla cape bone (same pivot, bind rotation and
 // cube bounds), so the Java 1.7 cape animation binds to it exactly as before. The three child bones
-// (`cape_seg_1/2/3`) split the lower 12 pixels of the cape into a chain, which `animation.player.cape_physics`
-// drives with simulated cloth physics. Each slice keeps the exact vanilla UV layout so the cape texture is
-// unaffected.
+// (`cape_seg_1/2/3`) split the lower 12 pixels of the cape into a chain, which `animation.player.cape`
+// drives with simulated cloth physics (the segment channels live in the `cape` animation because the
+// dedicated cape pass only auto-applies that animation). Each slice keeps the exact vanilla UV layout so
+// the cape texture is unaffected.
 //
 // NOTE: this file is a byte-for-byte mirror of `models/entity/cape.geo.json` (the only differences are the
 // geometry identifiers). Keep both files in sync. These identifiers are kept as drop-in alternates of

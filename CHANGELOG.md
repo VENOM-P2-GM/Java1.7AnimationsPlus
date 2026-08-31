@@ -1,5 +1,16 @@
 ### Unreleased
 
+- Fixed the cape physics segments not moving after the cape started rendering again
+    - The dedicated engine cape render pass only auto-applies the `cape` animation to the cape geometry; it
+      does not run `player.entity.json`'s generic `animate` list. The separate
+      `animation.player.cape_physics` therefore never reached the segmented `cape_seg_*` bones, so the
+      cape rendered as a rigid plate
+    - The three segment channels now live inside `animation.player.cape`, which is the animation the cape
+      pass actually applies, so the simulated cloth response reaches the segments again
+    - Removed the now-unused `animation.player.cape_physics` file and the `cape_physics` wiring from all
+      subpack `player.entity.json` files; the simulation still runs once per frame in `pre_animation`
+    - Strengthened the cloth response for a clearer, more reactive cape: faster velocity smoothing, higher
+      trailing target and per-segment gains, more yaw sway and stronger speed-scaled flutter
 - Fixed the cape not rendering at all (it disappeared entirely after the cape physics update)
     - The cape render controller's geometry expression now references the segmented cape exactly the
       way the game's own vanilla cape render controller does: plain `Geometry.cape`, with the
@@ -19,12 +30,12 @@
 - Cape physics (segmented cape with simulated cloth response)
     - `geometry.cape` / `geometry.cape_root_parent` are now a chain of four bones
       (`cape` -> `cape_seg_1` -> `cape_seg_2` -> `cape_seg_3`) instead of a single rigid plate
-    - `geometry.cape_physics` / `geometry.cape_physics_root_parent` (bound to the `cape` /
-      `cape_root_parent` slots in player.entity.json) are kept as identical copies, so the segmented
-      cape resolves no matter whether the cape pass reads the render controller's geometry expression
-      or the client entity slot
-    - New `animation.player.cape_physics` drives the three lower segments with velocity based trailing,
-      smoothed sway, a speed scaled travelling flutter and a vertical-speed billow
+    - `geometry.cape_physics` / `geometry.cape_physics_root_parent` are kept as identical copies as
+      drop-in alternates; the render controller and the `cape` / `cape_root_parent` entity slots use
+      the vanilla-style `geometry.cape` / `geometry.cape_root_parent` identifiers
+    - The three lower segments are driven inside `animation.player.cape` (the animation the dedicated
+      cape pass applies) with velocity based trailing, smoothed sway, a speed scaled travelling
+      flutter and a vertical-speed billow
     - The simulation runs in `player.entity.json`'s `pre_animation` (same pattern as
       `v.relative_cape_rotation`) so every value is integrated exactly once per frame, and all cape
       variables are initialised

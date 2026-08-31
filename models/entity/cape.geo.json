@@ -1,7 +1,9 @@
 // This file was modified by ambient (ambiennt on discord). Do not use or redistribute this file or its contents without explicit permission from the author.
 //
 // The cape is split into a vertical chain of bones (`cape` -> `cape_seg_1` -> `cape_seg_2` -> `cape_seg_3`)
-// so that `animation.player.cape_physics` can bend the lower part of the cape with simulated cloth motion.
+// so that `animation.player.cape` can bend the lower part of the cape with simulated cloth motion.
+// The dedicated engine cape render pass only auto-applies the `cape` animation to this geometry; it does
+// not run the entity's generic `animate` list, so those segment channels live inside `animation.player.cape`.
 // The top `cape` bone keeps the exact vanilla pivot / bind rotation / cube bounds, and the three segments
 // split the remaining 12 pixels of the cape into 4 pixel slices, each pivoting at the top edge of its own
 // cube and keeping the vanilla UV layout (uv y = 0, 4, 8, 12), so the cape texture is untouched and the

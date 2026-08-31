@@ -7,9 +7,12 @@
 // This file mirrors the game's built-in vanilla cape render controller (plus visibility rules
 // for the physics segments, see models/entity/cape.geo.json):
 // - `rebuild_animation_matrices` is part of the vanilla cape render controller and is required
-//   for the cape pass to apply `animation.player.cape` / `animation.player.cape_physics` at all.
-//   Without it the cape pass re-uses the player model's cached bone matrices (where the `cape`
-//   bone does not exist) and the cape renders frozen in its bind pose.
+//   for the cape pass to apply `animation.player.cape` at all. Without it the cape pass re-uses
+//   the player model's cached bone matrices (where the `cape` bone does not exist) and the cape
+//   renders frozen in its bind pose.
+// - The cape pass only auto-applies the `cape` animation, so the `cape_seg_*` segment channels
+//   (cape physics) are also defined inside `animation.player.cape`; they cannot be driven by a
+//   generic animation in player.entity.json's `animate` list.
 // - The geometry is referenced exactly the way vanilla does: plain `Geometry.cape`, no ternary.
 //   An earlier version selected `geometry.cape_physics(_root_parent)` through an
 //   `(q.is_emoting || v.is_in_menu)` ternary here, and the cape pass stopped rendering entirely.

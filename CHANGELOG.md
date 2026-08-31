@@ -1,5 +1,19 @@
 ### Unreleased
 
+- Fixed the cape physics segments not moving (the cape rendered again, but `cape_seg_1/2/3` stayed frozen)
+    - `animation.player.cape_physics` is now played from the root animation controller's third-person
+      state, right next to `animation.player.cape`, instead of only from `scripts.animate`. The dedicated
+      cape render pass re-runs the animation controller state machine for the cape geometry, and an
+      animation wired up only through `scripts.animate` is never applied there, so the physics animation
+      never ran and the segments never moved. The controller entry keeps the same `v.is_valid_player`
+      gate, so the physics still never applies in menus/paperdolls
+- Strengthened the cape cloth response (the trailing/flutter was so weak it was barely visible)
+    - Snappier wind sampling (speed smoothing 0.35 -> 0.5), stronger trailing (h-speed factor 1.6 -> 2.0,
+      clamp 18 -> 24, per-segment gains 0.6/0.85/1.1 -> 0.95/1.4/1.85, response 0.45/0.38/0.3 ->
+      0.55/0.48/0.4), restored swim/glide streaming terms that the pre_animation rewrite dropped
+      (swim +8, glide +18), stronger yaw sway (`relative_cape_rotation * 10` -> `* 14`) and a more
+      pronounced speed-scaled travelling flutter (`min(h_speed, 4) * 0.25` -> `min(h_speed, 6) * 0.35`
+      with ~50% higher wave multipliers in the animation)
 - Fixed the cape not rendering at all (it disappeared entirely after the cape physics update)
     - The cape render controller's geometry expression now references the segmented cape exactly the
       way the game's own vanilla cape render controller does: plain `Geometry.cape`, with the

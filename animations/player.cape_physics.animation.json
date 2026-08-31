@@ -17,6 +17,13 @@
 // That way every value is integrated exactly once per frame, for every player that can render a cape.
 // This file only reads those values and adds a speed-scaled travelling flutter wave.
 //
+// This animation is played from `controller.animation.player.root`'s third-person state, right next to
+// `animation.player.cape` (and gated on `v.is_valid_player`, so it never applies in menus/paperdolls).
+// That matters because the dedicated cape render pass re-runs the animation controller state machine for
+// the cape geometry: an animation wired up only through `scripts.animate` is never applied there, and the
+// segments stay frozen at rest. The `cape` bone works because it is controller-driven; the segments now
+// are too.
+//
 // At rest every smoothed value decays back to 0.0, so the cape hangs exactly like the vanilla cape.
 {
   "format_version": "1.10.0",
@@ -26,23 +33,23 @@
       "bones": {
         "cape_seg_1": {
           "rotation": [
-            "v.cape_rx_1 + math.sin(q.life_time * 11.0) * v.cape_flutter * 2.0",
-            "v.cape_ry_1 + math.sin(q.life_time * 9.0) * v.cape_flutter * 1.6",
-            "v.relative_cape_rotation * 6.0 + math.sin(q.life_time * 8.0) * v.cape_flutter * 0.6"
+            "v.cape_rx_1 + math.sin(q.life_time * 11.0) * v.cape_flutter * 3.0",
+            "v.cape_ry_1 + math.sin(q.life_time * 9.0) * v.cape_flutter * 2.4",
+            "v.relative_cape_rotation * 9.0 + math.sin(q.life_time * 8.0) * v.cape_flutter * 0.9"
           ]
         },
         "cape_seg_2": {
           "rotation": [
-            "v.cape_rx_2 + math.sin(q.life_time * 11.0 + 1.1) * v.cape_flutter * 3.0",
-            "v.cape_ry_2 + math.sin(q.life_time * 9.0 + 1.1) * v.cape_flutter * 2.4",
-            "v.relative_cape_rotation * 6.0 + math.sin(q.life_time * 8.0 + 2.2) * v.cape_flutter * 0.9"
+            "v.cape_rx_2 + math.sin(q.life_time * 11.0 + 1.1) * v.cape_flutter * 4.5",
+            "v.cape_ry_2 + math.sin(q.life_time * 9.0 + 1.1) * v.cape_flutter * 3.6",
+            "v.relative_cape_rotation * 9.0 + math.sin(q.life_time * 8.0 + 2.2) * v.cape_flutter * 1.35"
           ]
         },
         "cape_seg_3": {
           "rotation": [
-            "v.cape_rx_3 + math.sin(q.life_time * 11.0 + 2.2) * v.cape_flutter * 4.0",
-            "v.cape_ry_3 + math.sin(q.life_time * 9.0 + 2.2) * v.cape_flutter * 3.2",
-            "v.relative_cape_rotation * 6.0 + math.sin(q.life_time * 8.0 + 4.4) * v.cape_flutter * 1.2"
+            "v.cape_rx_3 + math.sin(q.life_time * 11.0 + 2.2) * v.cape_flutter * 6.0",
+            "v.cape_ry_3 + math.sin(q.life_time * 9.0 + 2.2) * v.cape_flutter * 4.8",
+            "v.relative_cape_rotation * 9.0 + math.sin(q.life_time * 8.0 + 4.4) * v.cape_flutter * 1.8"
           ]
         }
       }
